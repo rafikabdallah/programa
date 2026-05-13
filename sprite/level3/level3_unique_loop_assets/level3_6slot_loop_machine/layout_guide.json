@@ -1,0 +1,30 @@
+{
+  "machine": "LoopMachine6Slot",
+  "frame_size": "176x80",
+  "slot_count": 6,
+  "slot_size": "24x24",
+  "animations": [
+    "idle",
+    "active",
+    "error"
+  ],
+  "intended_rule": "WHILE oxygen < 10 DO oxygen + 2",
+  "slot_layout": {
+    "top_row": [
+      "oxygen",
+      "condition_operator",
+      "condition_value"
+    ],
+    "bottom_row": [
+      "oxygen",
+      "action_operator",
+      "action_value"
+    ]
+  },
+  "important": "No text, operators, numbers, or oxygen labels are baked into the machine. Add those as pieces in Godot.",
+  "godot_import": "Nearest filter, Mipmaps Off, Lossless",
+  "recommended_position_320x180": {
+    "x": 72,
+    "y": 66
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "game_resolution": "320x180",
+  "panel_size": "176x88",
+  "center_position": {
+    "x": 72,
+    "y": 46
+  },
+  "success": {
+    "panel": "ResultPanel_Success_176x88.png",
+    "button": "Next_Normal_72x16.png"
+  },
+  "fail": {
+    "panel": "ResultPanel_Fail_176x88.png",
+    "button": "TryAgain_Normal_88x16.png"
+  },
+  "import_settings": "Nearest filter, mipmaps off, lossless.",
+  "godot_scene": "UI/ResultPanel -> PanelImage + ActionButton"
+}

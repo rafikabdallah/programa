@@ -1,0 +1,19 @@
+{
+  "size": "96x18",
+  "states": [
+    "normal",
+    "hover",
+    "pressed"
+  ],
+  "buttons": [
+    "ABOUT",
+    "BACK"
+  ],
+  "godot_setup": "Use TextureButton. Assign Normal, Hover, and Pressed textures. Filter: Nearest, Mipmaps: Off, Compression: Lossless.",
+  "palette": {
+    "normal": "#35D0FF",
+    "hover": "#7EEBFF",
+    "pressed": "#1A8FB0",
+    "scanline": "#1B6D8A alpha"
+  }
+}

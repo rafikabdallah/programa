@@ -1,0 +1,36 @@
+{
+  "logo_size": "112x40 px",
+  "use_in_godot": "TextureRect or Sprite2D. Import filter: Nearest, Mipmaps: Off.",
+  "subtitle_typing": "Use a Label node with typing effect text: restore logic. restore life.",
+  "console_typing": "Use a Label node on the console with typing effect text: SYSTEM\\nOFFLINE_",
+  "recommended_main_menu_positions_320x180": {
+    "logo": {
+      "x": 24,
+      "y": 22
+    },
+    "subtitle_label": {
+      "x": 26,
+      "y": 64
+    },
+    "buttons": {
+      "START": [
+        28,
+        112
+      ],
+      "SETTINGS": [
+        28,
+        132
+      ],
+      "EXIT": [
+        28,
+        152
+      ]
+    }
+  },
+  "palette": {
+    "cyan": "#35D0FF",
+    "bright_cyan": "#7EEBFF",
+    "dark_navy": "#0B1020",
+    "deep_blue": "#111A33"
+  }
+}

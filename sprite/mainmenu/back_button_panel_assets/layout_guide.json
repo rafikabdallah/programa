@@ -1,0 +1,16 @@
+{
+  "asset": "Back button with dark sci-fi panel background",
+  "recommended_use": "TextureButton inside AboutPanel",
+  "size": "72x16",
+  "states": {
+    "normal": "button_BACK_panel_normal_72x16.png",
+    "hover": "button_BACK_panel_hover_72x16.png",
+    "pressed": "button_BACK_panel_pressed_72x16.png"
+  },
+  "recommended_position_inside_about_panel": "centered near bottom, e.g. x = panel_width/2 - 36, y = panel_height - 24",
+  "import_settings": {
+    "Filter": "Nearest",
+    "Mipmaps": "Off",
+    "Compression": "Lossless"
+  }
+}

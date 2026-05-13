@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dyi1dvjx1smgm"]
+
+[ext_resource type="Script" uid="uid://clyc7nhmokqqa" path="res://scenes/ending_script/ending_screen.gd" id="1_0joeg"]
+[ext_resource type="FontFile" uid="uid://cylu4n245lnk7" path="res://sprite/fonts/pixel_operator/PixelOperatorSC.ttf" id="1_jkwpc"]
+[ext_resource type="Texture2D" uid="uid://cnu6qv1ury7jt" path="res://sprite/ending/back_button/BackToMenu_Normal_112x20.png" id="2_0joeg"]
+[ext_resource type="Texture2D" uid="uid://dvb3m0gsninra" path="res://sprite/ending/ending_image.png" id="2_4313b"]
+[ext_resource type="Texture2D" uid="uid://dbypxhw2qjetm" path="res://sprite/ending/back_button/BackToMenu_Pressed_112x20.png" id="3_4313b"]
+[ext_resource type="Texture2D" uid="uid://c0j8vg8gik1ox" path="res://sprite/ending/back_button/BackToMenu_Hover_112x20.png" id="4_qpc4k"]
+[ext_resource type="FontFile" uid="uid://banhpbu3ae52j" path="res://sprite/fonts/pixel_operator/PixelOperatorSC-Bold.ttf" id="4_wj6lj"]
+[ext_resource type="AudioStream" uid="uid://jc7s63wyjwfp" path="res://audio/ambience/ambience_room_loop.ogg" id="8_5nntc"]
+[ext_resource type="AudioStream" uid="uid://c78xxsrbn1srr" path="res://audio/ui/terminal_blip.wav" id="9_o2gku"]
+[ext_resource type="AudioStream" uid="uid://cnmlfw73gd8gf" path="res://audio/ui/menu_press.wav" id="10_aprg5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkwpc"]
+bg_color = Color(0.019607844, 0.039215688, 0.078431375, 0.93333334)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.101960786, 0.56078434, 0.6901961, 1)
+corner_detail = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_wj6lj"]
+font = ExtResource("1_jkwpc")
+font_size = 8
+font_color = Color(0.3019608, 1, 0.53333336, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nm5sb"]
+font = ExtResource("4_wj6lj")
+font_size = 8
+font_color = Color(0.20784314, 0.8156863, 1, 1)
+
+[node name="EndingScreen" type="Control" unique_id=42045459]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_0joeg")
+
+[node name="Background" type="TextureRect" parent="." unique_id=489396084]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("2_4313b")
+expand_mode = 2
+
+[node name="TerminalPanel" type="Panel" parent="." unique_id=78759730]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 288.0
+offset_bottom = 136.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jkwpc")
+
+[node name="EndingLabel" type="Label" parent="TerminalPanel" unique_id=1971583308]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 98.0
+label_settings = SubResource("LabelSettings_wj6lj")
+autowrap_mode = 2
+clip_text = true
+
+[node name="CreditLabel" type="Label" parent="TerminalPanel" unique_id=1999431323]
+layout_mode = 0
+offset_left = 147.0
+offset_top = 89.0
+offset_right = 251.0
+offset_bottom = 104.0
+label_settings = SubResource("LabelSettings_nm5sb")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="BackToMenuButton" type="TextureButton" parent="." unique_id=2010689304]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 144.0
+offset_right = 216.0
+offset_bottom = 164.0
+texture_normal = ExtResource("2_0joeg")
+texture_pressed = ExtResource("3_4313b")
+texture_hover = ExtResource("4_qpc4k")
+
+[node name="Audio" type="Node" parent="." unique_id=782455006]
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="Audio" unique_id=1944461066]
+stream = ExtResource("8_5nntc")
+volume_db = 15.489
+bus = &"Ambience"
+
+[node name="TerminalBlipPlayer" type="AudioStreamPlayer" parent="Audio" unique_id=1153348794]
+stream = ExtResource("9_o2gku")
+volume_db = -14.0
+bus = &"SFX"
+
+[node name="PressPlayer" type="AudioStreamPlayer" parent="Audio" unique_id=786178170]
+stream = ExtResource("10_aprg5")
+volume_db = -8.0
+
+[connection signal="pressed" from="BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]

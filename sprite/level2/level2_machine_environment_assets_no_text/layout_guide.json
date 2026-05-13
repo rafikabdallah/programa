@@ -1,0 +1,32 @@
+{
+  "game_resolution": "320x180",
+  "style": "flat 2D, same visual language as final Level 1",
+  "no_text_or_symbols": "Assets contain only empty slots/machine shapes; add all labels/operators/numbers in Godot.",
+  "assets": {
+    "IFMachine": {
+      "frame_size": "128x64",
+      "slots": "4 empty insertable slots"
+    },
+    "PressureTank": {
+      "frame_size": "64x80",
+      "states": [
+        "unstable",
+        "stabilizing",
+        "stable"
+      ]
+    },
+    "PressureBarTank": {
+      "frame_size": "32x64",
+      "states": [
+        "high",
+        "lowering",
+        "safe"
+      ]
+    }
+  },
+  "godot_setup": {
+    "node": "AnimatedSprite2D",
+    "import": "Nearest filter, Mipmaps Off, Lossless",
+    "suggested_fps": "IFMachine 4-6 FPS, PressureTank 4 FPS, PressureBarTank 5 FPS"
+  }
+}

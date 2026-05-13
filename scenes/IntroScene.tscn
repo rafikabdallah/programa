@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://co3cc5a1riqre"]
+
+[ext_resource type="Script" uid="uid://c6fa6oq0bhp0w" path="res://scenes/intro_script/intro_scene.gd" id="1_k6el7"]
+[ext_resource type="Texture2D" uid="uid://cmec373rqer8y" path="res://sprite/intro/intro.png" id="2_6tor5"]
+[ext_resource type="FontFile" uid="uid://cylu4n245lnk7" path="res://sprite/fonts/pixel_operator/PixelOperatorSC.ttf" id="3_nifp7"]
+[ext_resource type="FontFile" uid="uid://banhpbu3ae52j" path="res://sprite/fonts/pixel_operator/PixelOperatorSC-Bold.ttf" id="4_6tor5"]
+[ext_resource type="AudioStream" uid="uid://jc7s63wyjwfp" path="res://audio/ambience/ambience_room_loop.ogg" id="5_yr2gr"]
+[ext_resource type="AudioStream" uid="uid://c78xxsrbn1srr" path="res://audio/ui/terminal_blip.wav" id="6_nifp7"]
+[ext_resource type="AudioStream" uid="uid://cnmlfw73gd8gf" path="res://audio/ui/menu_press.wav" id="7_0vfxv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkwpc"]
+bg_color = Color(0.019607844, 0.039215688, 0.078431375, 0.93333334)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.101960786, 0.56078434, 0.6901961, 1)
+corner_detail = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_wj6lj"]
+font = ExtResource("3_nifp7")
+font_size = 8
+font_color = Color(0.3019608, 1, 0.53333336, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nx802"]
+font = ExtResource("4_6tor5")
+font_size = 13
+font_color = Color(0.20784314, 0.8156863, 1, 1)
+
+[node name="IntroScene" type="Control" unique_id=42045459]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_k6el7")
+page_wait_time = 1.4
+
+[node name="Background" type="TextureRect" parent="." unique_id=489396084]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("2_6tor5")
+expand_mode = 2
+
+[node name="TerminalPanel" type="Panel" parent="." unique_id=78759730]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 288.0
+offset_bottom = 136.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jkwpc")
+
+[node name="IntroLabel" type="Label" parent="TerminalPanel" unique_id=1971583308]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 98.0
+label_settings = SubResource("LabelSettings_wj6lj")
+autowrap_mode = 2
+clip_text = true
+
+[node name="ContinueHint" type="Label" parent="." unique_id=1077049456]
+visible = false
+layout_mode = 0
+offset_left = 119.0
+offset_top = 147.0
+offset_right = 206.0
+offset_bottom = 170.0
+text = " PRESS ANY KEY"
+label_settings = SubResource("LabelSettings_nx802")
+
+[node name="Audio" type="Node2D" parent="." unique_id=590404140]
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="Audio" unique_id=188427177]
+stream = ExtResource("5_yr2gr")
+volume_db = -16.0
+
+[node name="TerminalBlipPlayer" type="AudioStreamPlayer" parent="Audio" unique_id=1347302241]
+stream = ExtResource("6_nifp7")
+volume_db = -14.0
+
+[node name="PressPlayer" type="AudioStreamPlayer" parent="Audio" unique_id=1630129876]
+stream = ExtResource("7_0vfxv")
+volume_db = -8.0

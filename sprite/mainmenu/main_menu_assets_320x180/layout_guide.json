@@ -1,0 +1,35 @@
+{
+  "game_resolution": "320x180",
+  "background": "10_main_menu_background_no_logo_no_buttons_320x180.png",
+  "recommended_layers_order": [
+    "00_background_base_no_logo_320x180.png",
+    "01_large_window_frame_320x180.png",
+    "02_window_planet_and_stars_320x180.png",
+    "03_floor_reflection_320x180.png",
+    "06_right_wall_machines_320x180.png",
+    "05_console_offline_320x180.png",
+    "04_elis_silhouette_idle_320x180.png",
+    "07_animated_cyan_lights_frame_*.png",
+    "08_console_flicker_frame_*.png",
+    "buttons/text UI on top"
+  ],
+  "button_positions": {
+    "START": {
+      "x": 20,
+      "y": 110
+    },
+    "SETTINGS": {
+      "x": 20,
+      "y": 130
+    },
+    "EXIT": {
+      "x": 20,
+      "y": 150
+    }
+  },
+  "animation_notes": {
+    "cyan_lights": "Use AnimatedSprite2D or TextureRect frames at 2 FPS, loop on.",
+    "console_flicker": "Use frames at 3 FPS, loop on, subtle.",
+    "E-lis": "Can replace static E-lis layer with your existing E-lis idle AnimatedSprite2D."
+  }
+}

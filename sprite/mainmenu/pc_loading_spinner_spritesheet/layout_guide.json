@@ -1,0 +1,23 @@
+{
+  "recommended_asset": "pc_loading_spinner_sheet_8x_24x16.png",
+  "frame_size": "24x16",
+  "frames": 8,
+  "animation": "loading / waiting circle, slightly tilted/perspective",
+  "godot_setup": {
+    "node": "AnimatedSprite2D",
+    "sprite_frames": "Add frames from sprite sheet, horizontal 8 frames",
+    "fps": 8,
+    "loop": true,
+    "import": "Filter: Nearest, Mipmaps: Off"
+  },
+  "placement_tip_for_320x180_background": {
+    "place_on_console_screen": "around x=254, y=112",
+    "scale": "1,1 for 24x16 OR use 32x24 version if too small",
+    "note": "Move it manually so it sits inside the angled PC screen."
+  },
+  "palette": {
+    "cyan": "#35D0FF",
+    "bright_cyan": "#7EEBFF",
+    "dark_navy": "#0B1020"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "game_resolution": "320x180",
+  "important": "This pack is intentionally different from the IF machine: ring/loop-core machine, horizontal oxygen generator, horizontal oxygen bar, plant pod.",
+  "no_text_or_symbols": "No variables/operators/numbers/text are baked into the machine assets. Add <, 10, +, 2 and labels in Godot.",
+  "assets": {
+    "LoopMachine": {
+      "frame_size": "128x80",
+      "animations": [
+        "idle",
+        "active",
+        "error"
+      ],
+      "slots": "four socket pods around loop core"
+    },
+    "OxygenGenerator": {
+      "frame_size": "96x56",
+      "animations": [
+        "empty",
+        "filling",
+        "full",
+        "error"
+      ]
+    },
+    "OxygenBar": {
+      "frame_size": "80x24",
+      "animations": [
+        "empty",
+        "filling",
+        "full",
+        "error"
+      ]
+    },
+    "LifePod": {
+      "frame_size": "56x56",
+      "animations": [
+        "closed",
+        "waking",
+        "active",
+        "error"
+      ]
+    }
+  },
+  "godot_setup": {
+    "node": "AnimatedSprite2D",
+    "fps": "4-6",
+    "import": "Nearest filter, Mipmaps Off, Lossless"
+  },
+  "recommended_layout": {
+    "oxygen_generator": "left side",
+    "loop_machine": "center-left",
+    "oxygen_bar": "top-center",
+    "life_pod": "right of machine",
+    "pieces": "lower-middle"
+  }
+}

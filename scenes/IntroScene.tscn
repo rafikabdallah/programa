@@ -70,6 +70,15 @@ offset_bottom = 170.0
 text = " PRESS ANY KEY"
 label_settings = SubResource("LabelSettings_nx802")
 
+[node name="ContinueHint2" type="Label" parent="." unique_id=605409259]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 147.0
+offset_right = 236.0
+offset_bottom = 170.0
+text = "PRESS ANY KEY TO CONTINUE"
+label_settings = SubResource("LabelSettings_nx802")
+
 [node name="Audio" type="Node2D" parent="." unique_id=590404140]
 
 [node name="AmbiencePlayer" type="AudioStreamPlayer" parent="Audio" unique_id=188427177]

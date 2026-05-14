@@ -58,6 +58,9 @@ func _process(_delta):
 
 	if Input.is_action_just_pressed("drop_piece"):
 		drop_carried_piece()
+	
+	if Input.is_action_just_pressed("retrieve_piece"):
+		retrieve_from_slot()
 
 
 func pick_up_value():
@@ -114,6 +117,81 @@ func insert_into_slot():
 	update_interaction_hint()
 
 
+func retrieve_from_slot():
+	if carried_piece_data != null:
+		return
+
+	var slot = get_best_filled_nearby_slot()
+
+	if slot == null:
+		return
+
+	var data = slot.remove_piece()
+
+	if data == null:
+		return
+
+	carried_piece_data = data
+	carried_piece_source = data["source"]
+
+	holder.visible = true
+	carried_sprite.texture = data["texture"]
+	carried_sprite.visible = true
+
+	update_interaction_hint()
+
+
+func get_best_filled_nearby_slot():
+	var best_slot = null
+	var best_distance := INF
+
+	for slot in nearby_slots:
+		if slot == null:
+			continue
+
+		if not is_instance_valid(slot):
+			continue
+
+		if not slot.has_method("remove_piece"):
+			continue
+
+		if slot.stored_value == null:
+			continue
+
+		var distance = global_position.distance_to(slot.global_position)
+
+		if distance < best_distance:
+			best_distance = distance
+			best_slot = slot
+
+	return best_slot
+
+
+func get_best_empty_nearby_slot():
+	var best_slot = null
+	var best_distance := INF
+
+	for slot in nearby_slots:
+		if slot == null:
+			continue
+
+		if not is_instance_valid(slot):
+			continue
+
+		if not slot.has_method("insert_value"):
+			continue
+
+		if slot.stored_value != null:
+			continue
+
+		var distance = global_position.distance_to(slot.global_position)
+
+		if distance < best_distance:
+			best_distance = distance
+			best_slot = slot
+
+	return best_slot
+
 func get_best_nearby_slot():
 	var best_slot = null
 	var best_distance := INF
@@ -164,16 +242,21 @@ func update_interaction_hint():
 		if nearby_value != null:
 			interaction_hint_box.visible = true
 			interaction_hint.text = "Press X To Pick"
+		elif get_best_filled_nearby_slot() != null:
+			interaction_hint_box.visible = true
+			interaction_hint.text = "Press R To Retrieve"
 		else:
 			interaction_hint_box.visible = false
 		return
 
-	if get_best_nearby_slot() != null:
-		interaction_hint_box.visible = true
-		interaction_hint.text = "Press Space To Insert"
-	else:
-		interaction_hint_box.visible = true
-		interaction_hint.text = "Press E To Drop"
+	if carried_piece_data != null:
+		if get_best_nearby_slot() != null:
+			interaction_hint_box.visible = true
+			interaction_hint.text = "Press Space To Insert"
+		else:
+			interaction_hint_box.visible = true
+			interaction_hint.text = "Press E To Drop"
+		return
 
 
 func update_animation(direction: Vector2):
@@ -231,7 +314,6 @@ func play_level_sound(function_name: String):
 
 	if level.has_method(function_name):
 		level.call(function_name)
-
 
 func _on_pickup_detector_area_entered(area):
 	if area.has_method("pick_up") and carried_piece_data == null:

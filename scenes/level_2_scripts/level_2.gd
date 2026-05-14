@@ -43,7 +43,6 @@ var checking_rule := false
 @onready var pickup_sound: AudioStreamPlayer = $SoundPlayers/PickupSound
 @onready var drop_sound: AudioStreamPlayer = $SoundPlayers/DropSound
 @onready var insert_sound: AudioStreamPlayer = $SoundPlayers/InsertSound
-@onready var run_sound: AudioStreamPlayer = $SoundPlayers/RunSound
 @onready var pressure_release_sound: AudioStreamPlayer= $SoundPlayers/PressureReleaseSound
 @onready var success_sound: AudioStreamPlayer = $SoundPlayers/SuccessSound
 @onready var error_sound: AudioStreamPlayer = $SoundPlayers/ErrorSound
@@ -115,8 +114,6 @@ func check_rule_after_all_slots_inserted():
 
 	if level_finished:
 		return
-
-	play_run_sound()
 
 	if is_rule_correct():
 		await run_success_sequence()
@@ -317,9 +314,6 @@ func play_insert_sound():
 		insert_sound.play()
 
 
-func play_run_sound():
-	if run_sound != null:
-		run_sound.play()
 
 
 func play_pressure_release_sound():

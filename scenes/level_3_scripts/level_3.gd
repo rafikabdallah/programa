@@ -311,7 +311,7 @@ func play_level_start_audio():
 		ambience_player.play()
 
 	if oxygen_fill_player != null:
-		oxygen_fill_player.stop()
+		oxygen_fill_player.play()
 
 
 func play_pickup_sound():

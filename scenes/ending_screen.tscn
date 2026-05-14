@@ -30,6 +30,11 @@ font = ExtResource("4_wj6lj")
 font_size = 8
 font_color = Color(0.20784314, 0.8156863, 1, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_5nntc"]
+font = ExtResource("4_wj6lj")
+font_size = 13
+font_color = Color(0.20784314, 0.8156863, 1, 1)
+
 [node name="EndingScreen" type="Control" unique_id=42045459]
 layout_mode = 3
 anchors_preset = 0
@@ -97,5 +102,14 @@ bus = &"SFX"
 [node name="PressPlayer" type="AudioStreamPlayer" parent="Audio" unique_id=786178170]
 stream = ExtResource("10_aprg5")
 volume_db = -8.0
+
+[node name="ContinueHint" type="Label" parent="." unique_id=1940043925]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 147.0
+offset_right = 236.0
+offset_bottom = 170.0
+text = "PRESS ANY KEY TO CONTINUE"
+label_settings = SubResource("LabelSettings_5nntc")
 
 [connection signal="pressed" from="BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]

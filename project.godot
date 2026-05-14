@@ -13,7 +13,9 @@ config_version=5
 config/name="programa"
 run/main_scene="uid://bu7jakkf46l36"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.043137256, 0.0627451, 0.1254902, 1)
+boot_splash/image="uid://hkt3ew0jvorx"
+config/icon="uid://hkt3ew0jvorx"
 
 [display]
 

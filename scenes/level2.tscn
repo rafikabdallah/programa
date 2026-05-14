@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://rjs26bo0ngg6"]
 
-[ext_resource type="Texture2D" uid="uid://dry1scyojejx6" path="res://sprite/ui/simple_result_panel_assets/ResultPanel_Success_Empty_176x88.png" id="2_d741w"]
+[ext_resource type="Script" uid="uid://cmjl6kaxnck3l" path="res://scenes/level_2_scripts/slot.gd" id="1_4pib1"]
+[ext_resource type="Script" uid="uid://lbqshgtubasc" path="res://scenes/level_2_scripts/level_2.gd" id="1_vhc8m"]
+[ext_resource type="Texture2D" uid="uid://dry1scyojejx6" path="res://sprite/ui/simple_result_panel_assets/ResultPanel_Success_Empty_176x88.png" id="2_blwsp"]
 [ext_resource type="Texture2D" uid="uid://dq87ad7h6ry4h" path="res://sprite/ui/simple_result_panel_assets/ResultPanel_Fail_Empty_176x88.png" id="3_kxd52"]
 [ext_resource type="Texture2D" uid="uid://djwhtil6nc0vw" path="res://sprite/word_sprite/New Piskel-1.png.png" id="4_voiyu"]
 [ext_resource type="Texture2D" uid="uid://bw7ey1i8g3ck2" path="res://sprite/New Piskel.png" id="5_7gtag"]
@@ -28,11 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://dyrrqwj2ir0nk" path="res://sprite/level2/level2_machine_environment_assets_no_text/frames/IFMachine_idle_02_128x64.png" id="18_bbkaf"]
 [ext_resource type="Texture2D" uid="uid://c4u6tx0v1xqry" path="res://sprite/level2/level2_machine_environment_assets_no_text/frames/IFMachine_idle_03_128x64.png" id="19_2xbbw"]
 [ext_resource type="Texture2D" uid="uid://rq1glt2mqc41" path="res://sprite/level2/level2_machine_environment_assets_no_text/frames/PressureTank_stabilizing_01_64x80.png" id="19_rw1qx"]
-[ext_resource type="Script" uid="uid://bewydc1k1xs4l" path="res://scenes/level_2_scripts/slot_action_value.gd" id="19_w83wr"]
-[ext_resource type="Script" uid="uid://dqgayloh6qdks" path="res://scenes/level_2_scripts/slot_condition_value.gd" id="20_gjqpa"]
 [ext_resource type="Texture2D" uid="uid://dgowf12bw0d7x" path="res://sprite/level2/level2_machine_environment_assets_no_text/frames/PressureTank_stable_00_64x80.png" id="20_j3xf6"]
-[ext_resource type="Script" uid="uid://dhvqvno6v83vr" path="res://scenes/level_2_scripts/slot_action_operator.gd" id="20_lhgyi"]
-[ext_resource type="Script" uid="uid://dxc06rmmt7rxb" path="res://scenes/level_2_scripts/slot_condition_operator.gd" id="20_ukhdn"]
 [ext_resource type="Texture2D" uid="uid://bn5k8v5oy513t" path="res://sprite/level2/level2_machine_environment_assets_no_text/frames/PressureTank_stable_01_64x80.png" id="21_46vug"]
 [ext_resource type="Texture2D" uid="uid://bf7tx513k8asd" path="res://sprite/level2/level2_machine_environment_assets_no_text/frames/PressureTank_stable_02_64x80.png" id="22_sxojl"]
 [ext_resource type="Texture2D" uid="uid://w1h6rrt4u2p" path="res://sprite/objects/E-lis/down.png" id="23_bglp6"]
@@ -60,7 +58,6 @@
 [ext_resource type="FontFile" uid="uid://u0w8i6n6cdjg" path="res://sprite/fonts/pixel_operator/PixelOperator8-Bold.ttf" id="34_cy3l1"]
 [ext_resource type="Script" uid="uid://dt6le3p35xcvm" path="res://scenes/level_2_scripts/e_lis_level2.gd" id="34_ukhdn"]
 [ext_resource type="Texture2D" uid="uid://y3xs0ku7cfr" path="res://sprite/ui/menu.png" id="35_rspyr"]
-[ext_resource type="Script" uid="uid://lbqshgtubasc" path="res://scenes/level_2_scripts/level_2.gd" id="36_lhgyi"]
 [ext_resource type="FontFile" uid="uid://banhpbu3ae52j" path="res://sprite/fonts/pixel_operator/PixelOperatorSC-Bold.ttf" id="36_v3aa2"]
 [ext_resource type="Texture2D" uid="uid://b5vj3uci5nhk8" path="res://sprite/ui/simple_result_panel_assets/TryAgain_Normal_88x16.png" id="37_gmq50"]
 [ext_resource type="Texture2D" uid="uid://dxe36ajoslqit" path="res://sprite/ui/simple_result_panel_assets/TryAgain_Pressed_88x16.png" id="38_gjqpa"]
@@ -580,8 +577,8 @@ font = ExtResource("36_v3aa2")
 font_size = 10
 
 [node name="level2" type="Node2D" unique_id=282607674]
-script = ExtResource("36_lhgyi")
-success_panel_texture = ExtResource("2_d741w")
+script = ExtResource("1_vhc8m")
+success_panel_texture = ExtResource("2_blwsp")
 fail_panel_texture = ExtResource("3_kxd52")
 metadata/_edit_vertical_guides_ = [73.0]
 metadata/_edit_horizontal_guides_ = [-288.0]
@@ -632,7 +629,7 @@ animation = &"error"
 frame_progress = 0.9339743
 
 [node name="SlotConditionOperator" type="Area2D" parent="objects/IFMachine" unique_id=918713945]
-script = ExtResource("20_ukhdn")
+script = ExtResource("1_4pib1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/IFMachine/SlotConditionOperator" unique_id=1307471538]
 position = Vector2(-92, -45)
@@ -643,7 +640,7 @@ position = Vector2(-70, -22)
 region_rect = Rect2(-70, -22, 32, 32)
 
 [node name="SlotConditionValue" type="Area2D" parent="objects/IFMachine" unique_id=2058230591]
-script = ExtResource("20_gjqpa")
+script = ExtResource("1_4pib1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/IFMachine/SlotConditionValue" unique_id=1102368178]
 position = Vector2(-9, -45)
@@ -654,7 +651,7 @@ position = Vector2(-32.000004, -22)
 region_rect = Rect2(-32, -22, 32, 32)
 
 [node name="SlotActionOperator" type="Area2D" parent="objects/IFMachine" unique_id=1327203291]
-script = ExtResource("20_lhgyi")
+script = ExtResource("1_4pib1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/IFMachine/SlotActionOperator" unique_id=483495888]
 position = Vector2(-92.5, 31)
@@ -665,7 +662,7 @@ position = Vector2(-71, 6)
 region_rect = Rect2(-71, 6, 32, 32)
 
 [node name="SlotActionValue" type="Area2D" parent="objects/IFMachine" unique_id=1905652289]
-script = ExtResource("19_w83wr")
+script = ExtResource("1_4pib1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/IFMachine/SlotActionValue" unique_id=68380070]
 position = Vector2(-9, 31.125)
@@ -1049,12 +1046,12 @@ bus = &"SFX"
 
 [node name="SuccessSound" type="AudioStreamPlayer" parent="SoundPlayers" unique_id=2105701520]
 stream = ExtResource("97_2k2am")
-volume_db = -8.0
+volume_db = 10.0
 bus = &"UI"
 
 [node name="ErrorSound" type="AudioStreamPlayer" parent="SoundPlayers" unique_id=1423406949]
 stream = ExtResource("98_fsm5o")
-volume_db = -9.0
+volume_db = 10.0
 bus = &"UI"
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="SoundPlayers" unique_id=649757833]

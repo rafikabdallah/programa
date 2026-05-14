@@ -903,17 +903,17 @@ offset_bottom = 180.0
 [node name="PanelBackground" type="ColorRect" parent="UI/UIRoot/GuidePanel" unique_id=1024865118]
 layout_mode = 0
 offset_left = 64.666664
-offset_top = 6.666664
+offset_top = 18.666664
 offset_right = 312.6667
-offset_bottom = 212.66666
+offset_bottom = 224.66666
 color = Color(0.06666667, 0.101960786, 0.2, 0.8666667)
 
 [node name="GuideText" type="Label" parent="UI/UIRoot/GuidePanel" unique_id=1625758977]
 layout_mode = 0
 offset_left = 80.666664
-offset_top = 6.666664
+offset_top = 18.666664
 offset_right = 304.6667
-offset_bottom = 212.66666
+offset_bottom = 224.66666
 text = "HOW TO PLAY
 
 Every level has a broken system.
@@ -921,13 +921,16 @@ Every level has a broken system.
 Read the screen.
 It tells you what the system needs.
 
-Move with W A S D.
+Move with W A S D
+or Arrow Keys.
 
 Pick values with X.
-Drop value with E
+Drop value with E.
 Insert with SPACE.
+Retrieve from slots with R.
 
-Restore the system to open the door."
+Restore the system
+to open the door."
 label_settings = SubResource("LabelSettings_sjqnv")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -936,10 +939,10 @@ clip_text = true
 
 [node name="ContinueHint" type="Label" parent="UI/UIRoot/GuidePanel" unique_id=523741163]
 layout_mode = 0
-offset_left = 163.33334
-offset_top = 212.66667
-offset_right = 222.33334
-offset_bottom = 235.66667
+offset_left = 167.33334
+offset_top = 220.66667
+offset_right = 226.33334
+offset_bottom = 243.66667
 text = "PRESS ANY KEY"
 label_settings = SubResource("LabelSettings_g6862")
 horizontal_alignment = 1
@@ -966,12 +969,12 @@ bus = &"SFX"
 
 [node name="SuccessSound" type="AudioStreamPlayer" parent="SoundPlayers" unique_id=215363496]
 stream = ExtResource("54_rb3io")
-volume_db = -8.0
+volume_db = 10.0
 bus = &"UI"
 
 [node name="ErrorSound" type="AudioStreamPlayer" parent="SoundPlayers" unique_id=1090618455]
 stream = ExtResource("55_x7a8r")
-volume_db = -9.0
+volume_db = 10.0
 bus = &"UI"
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="SoundPlayers" unique_id=1759125346]

@@ -45,3 +45,10 @@ func keep_hidden_after_insert():
 	monitoring = false
 	monitorable = false
 	collision_shape.disabled = true
+	
+func disable_after_success():
+	picked = true
+	visible = false
+	monitoring = false
+	monitorable = false
+	collision_shape.disabled = true

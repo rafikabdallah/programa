@@ -710,7 +710,6 @@ tile_map_data = PackedByteArray("AAD2////AgAAAAAAAAD2//7/AgAAAAEAAAD5//b/AgAAAAE
 tile_set = SubResource("TileSet_6sh32")
 
 [node name="DarknessOverlay" type="ColorRect" parent="." unique_id=763822398]
-visible = false
 offset_left = -264.0
 offset_top = -232.0
 offset_right = 409.0
@@ -1183,12 +1182,12 @@ bus = &"SFX"
 
 [node name="SuccessSound" type="AudioStreamPlayer" parent="SoundPlayers" unique_id=391687031]
 stream = ExtResource("112_tliwx")
-volume_db = -8.0
+volume_db = 10.0
 bus = &"UI"
 
 [node name="ErrorSound" type="AudioStreamPlayer" parent="SoundPlayers" unique_id=943082285]
 stream = ExtResource("113_5lxcx")
-volume_db = -9.0
+volume_db = 10.0
 bus = &"UI"
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="SoundPlayers" unique_id=1939557161]

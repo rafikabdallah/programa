@@ -4,7 +4,6 @@ var oxygen := 0
 var target_oxygen := 10
 var level_finished := false
 var checking_rule := false
-var oxygen_fill_should_loop := false
 
 @export var success_panel_texture: Texture2D
 @export var fail_panel_texture: Texture2D
@@ -62,6 +61,7 @@ func _ready():
 	panel_image.visible = false
 	try_again_button.visible = false
 	next_button.visible = false
+	next_button.disabled = false
 
 	play_level_start_audio()
 
@@ -73,7 +73,7 @@ func _ready():
 			exit_trigger.body_entered.connect(_on_exit_trigger_body_entered)
 
 	if darkness_overlay != null:
-		darkness_overlay.color.a = 0.45
+		darkness_overlay.color.a = 0.35
 
 	if lights != null:
 		lights.modulate = Color.html("#FFD84D")
@@ -121,8 +121,6 @@ func check_rule_after_all_slots_inserted():
 	if level_finished:
 		return
 
-
-
 	if is_rule_correct():
 		await run_success_sequence()
 	else:
@@ -147,7 +145,7 @@ func run_success_sequence():
 	play_oxygen_fill_sound()
 
 	if lights != null:
-		lights.modulate = Color.html("#35D0FF")
+		lights.modulate = Color.html("#FFD84D")
 
 	display_label.show_message("LOOP ACCEPTED\nFILLING OXYGEN")
 
@@ -161,6 +159,9 @@ func run_success_sequence():
 
 	play_safe_animations()
 
+	if lights != null:
+		lights.modulate = Color.html("#35D0FF")
+
 	stop_oxygen_fill_sound()
 	play_life_pod_sound()
 	play_success_sound()
@@ -168,6 +169,8 @@ func run_success_sequence():
 	fade_darkness_to(0.0)
 
 	display_label.show_message("OXYGEN STABLE\nCURRENT: 10\nLIFE SUPPORT ONLINE")
+
+	lock_puzzle_after_success()
 
 	await get_tree().create_timer(0.5).timeout
 	show_success_panel()
@@ -219,6 +222,23 @@ func show_success_panel():
 
 	try_again_button.visible = false
 	next_button.visible = true
+	next_button.disabled = false
+
+
+func lock_puzzle_after_success():
+	var pieces = get_tree().get_nodes_in_group("level_piece")
+	for piece in pieces:
+		if piece.has_method("disable_after_success"):
+			piece.disable_after_success()
+
+	var slots = get_tree().get_nodes_in_group("machine_slot")
+	for slot in slots:
+		if slot.has_method("lock_slot"):
+			slot.lock_slot()
+
+	var player = get_node_or_null("objects/E-lis")
+	if player != null and player.has_method("set_interaction_enabled"):
+		player.set_interaction_enabled(false)
 
 
 func _on_try_again_button_pressed():
@@ -310,9 +330,6 @@ func play_level_start_audio():
 	if ambience_player != null:
 		ambience_player.play()
 
-	if oxygen_fill_player != null:
-		oxygen_fill_player.play()
-
 
 func play_pickup_sound():
 	if pickup_sound != null:
@@ -329,23 +346,10 @@ func play_insert_sound():
 		insert_sound.play()
 
 
-
-
 func play_oxygen_fill_sound():
-	print("Trying to play OxygenFillPlayer")
+	if oxygen_fill_player != null:
+		oxygen_fill_player.play()
 
-	oxygen_fill_should_loop = true
-
-	if oxygen_fill_player == null:
-		print("ERROR: OxygenFillPlayer node is null")
-		return
-
-	if oxygen_fill_player.stream == null:
-		print("ERROR: OxygenFillPlayer has no audio stream assigned")
-		return
-
-	print("OxygenFillPlayer found, playing now")
-	oxygen_fill_player.play()
 
 func stop_oxygen_fill_sound():
 	if oxygen_fill_player != null and oxygen_fill_player.playing:
@@ -377,4 +381,3 @@ func play_error_sound():
 func play_door_open_sound():
 	if door_open_sound != null:
 		door_open_sound.play()
-		

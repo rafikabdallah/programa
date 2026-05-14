@@ -3,6 +3,7 @@ extends Area2D
 var stored_value = null
 var stored_piece_source = null
 var stored_texture: Texture2D = null
+var locked := false
 
 @onready var inserted_sprite: Sprite2D = $InsertedSprite
 
@@ -12,6 +13,9 @@ func _ready():
 
 
 func insert_value(piece_data):
+	if locked:
+		return false
+
 	if piece_data == null:
 		return false
 
@@ -35,6 +39,9 @@ func insert_value(piece_data):
 
 
 func remove_piece():
+	if locked:
+		return null
+
 	if stored_value == null:
 		return null
 
@@ -54,6 +61,16 @@ func remove_piece():
 	notify_level_machine_state()
 
 	return piece_data
+	
+	
+func lock_slot():
+	locked = true
+	monitoring = false
+	monitorable = false
+	
+	var collision_shape = get_node_or_null("CollisionShape2D")
+	if collision_shape != null:
+		collision_shape.disabled = true
 
 
 func clear_slot():

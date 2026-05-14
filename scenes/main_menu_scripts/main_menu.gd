@@ -79,7 +79,15 @@ func _on_back_button_pressed():
 
 
 func _on_exit_button_pressed():
-	_play_press_sound()
+	if OS.has_feature("web"):
+		show_web_exit_message()
+	else:
+		get_tree().quit()
+		
+		
+func show_web_exit_message():
+	about_panel.visible = true
 
-	await get_tree().create_timer(0.12).timeout
-	get_tree().quit()
+	var about_text = about_panel.get_node_or_null("AboutText")
+	if about_text != null:
+		about_text.text = "You can close the browser tab to exit."

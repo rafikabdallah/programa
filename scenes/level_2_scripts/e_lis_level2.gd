@@ -11,6 +11,7 @@ var carried_piece_source = null
 
 var step_timer := 0.0
 var use_step_one := true
+var interaction_enabled := true
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var holder: AnimatedSprite2D = $Holder
@@ -32,13 +33,16 @@ func _ready():
 func _physics_process(delta):
 	var direction := Vector2.ZERO
 
-	if Input.is_key_pressed(KEY_D):
+	if Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT):
 		direction.x += 1
-	if Input.is_key_pressed(KEY_A):
+
+	if Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT):
 		direction.x -= 1
-	if Input.is_key_pressed(KEY_S):
+
+	if Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_DOWN):
 		direction.y += 1
-	if Input.is_key_pressed(KEY_W):
+
+	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP):
 		direction.y -= 1
 
 	direction = direction.normalized()
@@ -50,6 +54,9 @@ func _physics_process(delta):
 
 
 func _process(_delta):
+	if interaction_enabled == false:
+		return
+
 	if Input.is_action_just_pressed("pick_up"):
 		pick_up_value()
 
@@ -58,9 +65,16 @@ func _process(_delta):
 
 	if Input.is_action_just_pressed("drop_piece"):
 		drop_carried_piece()
-	
+
 	if Input.is_action_just_pressed("retrieve_piece"):
 		retrieve_from_slot()
+
+
+func set_interaction_enabled(enabled: bool):
+	interaction_enabled = enabled
+
+	if enabled == false:
+		interaction_hint_box.visible = false
 
 
 func pick_up_value():
@@ -94,13 +108,10 @@ func insert_into_slot():
 	if carried_piece_data == null:
 		return
 
-	var slot = get_best_nearby_slot()
+	var slot = get_best_empty_nearby_slot()
 
 	if slot == null:
 		update_interaction_hint()
-		return
-
-	if not slot.has_method("insert_value"):
 		return
 
 	var inserted = await slot.insert_value(carried_piece_data)
@@ -115,8 +126,8 @@ func insert_into_slot():
 		play_level_sound("play_insert_sound")
 
 	update_interaction_hint()
-	
-	
+
+
 func retrieve_from_slot():
 	if carried_piece_data != null:
 		return
@@ -141,30 +152,23 @@ func retrieve_from_slot():
 	update_interaction_hint()
 
 
-func get_best_filled_nearby_slot():
-	var best_slot = null
-	var best_distance := INF
+func drop_carried_piece():
+	if carried_piece_data == null:
+		return
 
-	for slot in nearby_slots:
-		if slot == null:
-			continue
+	if carried_piece_source != null:
+		carried_piece_source.return_to_origin()
 
-		if not is_instance_valid(slot):
-			continue
+	carried_piece_data = null
+	carried_piece_source = null
 
-		if not slot.has_method("remove_piece"):
-			continue
+	holder.visible = false
+	carried_sprite.texture = null
+	carried_sprite.visible = false
 
-		if slot.stored_value == null:
-			continue
+	play_level_sound("play_drop_sound")
 
-		var distance = global_position.distance_to(slot.global_position)
-
-		if distance < best_distance:
-			best_distance = distance
-			best_slot = slot
-
-	return best_slot
+	update_interaction_hint()
 
 
 func get_best_empty_nearby_slot():
@@ -193,8 +197,7 @@ func get_best_empty_nearby_slot():
 	return best_slot
 
 
-
-func get_best_nearby_slot():
+func get_best_filled_nearby_slot():
 	var best_slot = null
 	var best_distance := INF
 
@@ -205,10 +208,10 @@ func get_best_nearby_slot():
 		if not is_instance_valid(slot):
 			continue
 
-		if not slot.has_method("insert_value"):
+		if not slot.has_method("remove_piece"):
 			continue
 
-		if slot.stored_value != null:
+		if slot.stored_value == null:
 			continue
 
 		var distance = global_position.distance_to(slot.global_position)
@@ -220,26 +223,11 @@ func get_best_nearby_slot():
 	return best_slot
 
 
-func drop_carried_piece():
-	if carried_piece_data == null:
+func update_interaction_hint():
+	if interaction_enabled == false:
+		interaction_hint_box.visible = false
 		return
 
-	if carried_piece_source != null:
-		carried_piece_source.return_to_origin()
-
-	carried_piece_data = null
-	carried_piece_source = null
-
-	holder.visible = false
-	carried_sprite.texture = null
-	carried_sprite.visible = false
-
-	play_level_sound("play_drop_sound")
-
-	update_interaction_hint()
-
-
-func update_interaction_hint():
 	if carried_piece_data == null:
 		if nearby_value != null:
 			interaction_hint_box.visible = true
@@ -252,13 +240,14 @@ func update_interaction_hint():
 		return
 
 	if carried_piece_data != null:
-		if get_best_nearby_slot() != null:
+		if get_best_empty_nearby_slot() != null:
 			interaction_hint_box.visible = true
 			interaction_hint.text = "Press Space To Insert"
 		else:
 			interaction_hint_box.visible = true
 			interaction_hint.text = "Press E To Drop"
 		return
+
 
 func update_animation(direction: Vector2):
 	if direction == Vector2.ZERO:
@@ -298,11 +287,9 @@ func update_step_sounds(direction: Vector2, delta: float):
 
 func play_step_sound():
 	if use_step_one:
-		if step_sound_1 != null:
-			step_sound_1.play()
+		step_sound_1.play()
 	else:
-		if step_sound_2 != null:
-			step_sound_2.play()
+		step_sound_2.play()
 
 	use_step_one = !use_step_one
 
@@ -310,13 +297,14 @@ func play_step_sound():
 func play_level_sound(function_name: String):
 	var level = get_tree().current_scene
 
-	if level == null:
-		return
-
 	if level.has_method(function_name):
 		level.call(function_name)
 
+
 func _on_pickup_detector_area_entered(area):
+	if interaction_enabled == false:
+		return
+
 	if area.has_method("pick_up") and carried_piece_data == null:
 		nearby_value = area
 
@@ -335,4 +323,3 @@ func _on_pickup_detector_area_exited(area):
 		nearby_slots.erase(area)
 
 	update_interaction_hint()
-	

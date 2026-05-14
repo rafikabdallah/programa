@@ -1,20 +1,19 @@
 extends Node2D
 
-var pressure := 16
+var pressure := 20
 var safe_pressure := 15
 var level_finished := false
 var checking_rule := false
 
 @export var success_panel_texture: Texture2D
 @export var fail_panel_texture: Texture2D
-
 @export var next_level_path := "res://scenes/level3.tscn"
 
 @onready var if_machine = $objects/IFMachine
 
-@onready var if_machine_anim: AnimatedSprite2D = get_node_or_null("objects/IFMachine/AnimatedSprite2D")
-@onready var pressure_tank_anim: AnimatedSprite2D = get_node_or_null("objects/PressureTank")
-@onready var pressure_bar_anim: AnimatedSprite2D = get_node_or_null("objects/PressureBarTank")
+@onready var if_machine_anim: AnimatedSprite2D = $objects/IFMachine/AnimatedSprite2D
+@onready var pressure_tank_anim: AnimatedSprite2D = $objects/PressureTank
+@onready var pressure_bar_anim: AnimatedSprite2D = $objects/PressureBarTank
 
 @onready var slot_condition_operator = $objects/IFMachine/SlotConditionOperator
 @onready var slot_condition_value = $objects/IFMachine/SlotConditionValue
@@ -36,14 +35,13 @@ var checking_rule := false
 @onready var door_blocker_collision: CollisionShape2D = $objects/Door/DoorBlocker/CollisionShape2D
 @onready var exit_trigger = $objects/Door/ExitTrigger
 
-# AUDIO
 @onready var ambience_player: AudioStreamPlayer = $AmbiencePlayer
 @onready var pressure_hiss_player: AudioStreamPlayer = $PressureHissPlayer
 
 @onready var pickup_sound: AudioStreamPlayer = $SoundPlayers/PickupSound
 @onready var drop_sound: AudioStreamPlayer = $SoundPlayers/DropSound
 @onready var insert_sound: AudioStreamPlayer = $SoundPlayers/InsertSound
-@onready var pressure_release_sound: AudioStreamPlayer= $SoundPlayers/PressureReleaseSound
+@onready var pressure_release_sound: AudioStreamPlayer = $SoundPlayers/PressureReleaseSound
 @onready var success_sound: AudioStreamPlayer = $SoundPlayers/SuccessSound
 @onready var error_sound: AudioStreamPlayer = $SoundPlayers/ErrorSound
 @onready var door_open_sound: AudioStreamPlayer = $SoundPlayers/DoorOpenSound
@@ -56,33 +54,25 @@ func _ready():
 	checking_rule = false
 
 	result_panel.visible = false
+	panel_image.visible = false
 	try_again_button.visible = false
 	next_button.visible = false
+	next_button.disabled = false
+
+	exit_trigger.monitoring = false
+	exit_trigger.monitorable = false
+
+	try_again_button.pressed.connect(_on_try_again_button_pressed)
+	next_button.pressed.connect(_on_next_button_pressed)
+	exit_trigger.body_entered.connect(_on_exit_trigger_body_entered)
+
+	darkness_overlay.color.a = 0.35
+	light_layer.modulate = Color.html("#FFD84D")
 
 	play_level_start_audio()
-
-	if exit_trigger != null:
-		exit_trigger.monitoring = false
-		exit_trigger.monitorable = false
-
-		if not exit_trigger.body_entered.is_connected(_on_exit_trigger_body_entered):
-			exit_trigger.body_entered.connect(_on_exit_trigger_body_entered)
-
-	if darkness_overlay != null:
-		darkness_overlay.color.a = 0.35
-
-	if light_layer != null:
-		light_layer.modulate = Color.html("#FFD84D")
-
 	play_level_start_animations()
 
-	display_label.show_message("PRESSURE TOO HIGH\nCURRENT: 16\nSAFE MAX: 15")
-
-	if not try_again_button.pressed.is_connected(_on_try_again_button_pressed):
-		try_again_button.pressed.connect(_on_try_again_button_pressed)
-
-	if not next_button.pressed.is_connected(_on_next_button_pressed):
-		next_button.pressed.connect(_on_next_button_pressed)
+	display_label.show_message("PRESSURE TOO HIGH\nCURRENT: 20\nSAFE MAX: 15")
 
 
 func update_if_machine_state():
@@ -135,21 +125,21 @@ func run_success_sequence():
 
 	play_correct_rule_animations()
 
-	if light_layer != null:
-		light_layer.modulate = Color.html("#35D0FF")
-
+	light_layer.modulate = Color.html("#FFD84D")
 	display_label.show_message("RULE ACCEPTED\nSTABILIZING PRESSURE")
+
+	lock_puzzle_after_success()
 
 	while pressure > safe_pressure:
 		await get_tree().create_timer(0.45).timeout
 		pressure -= 1
 
 		play_pressure_release_sound()
-
 		display_label.show_message("PRESSURE LOWERING\nCURRENT: " + str(pressure))
 
 	play_safe_animations()
 
+	light_layer.modulate = Color.html("#35D0FF")
 	fade_darkness_to(0.0)
 
 	display_label.show_message("PRESSURE STABLE\nCURRENT: 15\nSYSTEM SAFE")
@@ -166,24 +156,16 @@ func show_fail_state():
 
 	play_wrong_rule_animations()
 
-	if light_layer != null:
-		light_layer.modulate = Color.html("#FF4D4D")
+	light_layer.modulate = Color.html("#FF4D4D")
+	darkness_overlay.color.a = 0.45
 
-	if darkness_overlay != null:
-		darkness_overlay.color.a = 0.45
-
-	if display_label != null:
-		display_label.show_message("UNSAFE RULE\nPRESSURE NOT STABLE")
+	display_label.show_message("UNSAFE RULE\nPRESSURE NOT STABLE")
 
 	play_error_sound()
 
 	result_panel.visible = true
 	panel_image.visible = true
-
-	if fail_panel_texture != null:
-		panel_image.texture = fail_panel_texture
-	else:
-		print("Missing fail_panel_texture on Level2 root")
+	panel_image.texture = fail_panel_texture
 
 	result_message.visible = true
 	result_message.text = "unsafe rule\ntry again"
@@ -196,11 +178,7 @@ func show_fail_state():
 func show_success_panel():
 	result_panel.visible = true
 	panel_image.visible = true
-
-	if success_panel_texture != null:
-		panel_image.texture = success_panel_texture
-	else:
-		print("Missing success_panel_texture in Level2 Inspector")
+	panel_image.texture = success_panel_texture
 
 	result_message.visible = true
 	result_message.text = "pressure stable\nsystem safe"
@@ -208,6 +186,23 @@ func show_success_panel():
 
 	try_again_button.visible = false
 	next_button.visible = true
+	next_button.disabled = false
+
+
+func lock_puzzle_after_success():
+	var pieces = get_tree().get_nodes_in_group("level_piece")
+	for piece in pieces:
+		if piece.has_method("disable_after_success"):
+			piece.disable_after_success()
+
+	var slots = get_tree().get_nodes_in_group("machine_slot")
+	for slot in slots:
+		if slot.has_method("lock_slot"):
+			slot.lock_slot()
+
+	var player = get_node_or_null("objects/E-lis")
+	if player != null and player.has_method("set_interaction_enabled"):
+		player.set_interaction_enabled(false)
 
 
 func _on_try_again_button_pressed():
@@ -223,16 +218,13 @@ func unlock_exit_after_success():
 
 	play_door_open_sound()
 
-	if door_anim != null:
-		if door_anim.sprite_frames.has_animation("open"):
-			door_anim.play("open")
+	if door_anim.sprite_frames.has_animation("open"):
+		door_anim.play("open")
 
-	if door_blocker_collision != null:
-		door_blocker_collision.disabled = true
+	door_blocker_collision.disabled = true
 
-	if exit_trigger != null:
-		exit_trigger.monitoring = true
-		exit_trigger.monitorable = true
+	exit_trigger.monitoring = true
+	exit_trigger.monitorable = true
 
 
 func _on_exit_trigger_body_entered(body):
@@ -265,77 +257,46 @@ func play_wrong_rule_animations():
 
 
 func play_animation_if_exists(animated_sprite: AnimatedSprite2D, animation_name: String):
-	if animated_sprite == null:
-		print("Missing AnimatedSprite2D for animation: ", animation_name)
-		return
-
-	if animated_sprite.sprite_frames == null:
-		print("Missing SpriteFrames on: ", animated_sprite.name)
-		return
-
 	if animated_sprite.sprite_frames.has_animation(animation_name):
 		animated_sprite.play(animation_name)
-	else:
-		print("Missing animation: ", animation_name, " on ", animated_sprite.name)
 
 
 func fade_darkness_to(target_alpha: float):
-	if darkness_overlay == null:
-		return
-
 	var tween = create_tween()
 	tween.tween_property(darkness_overlay, "color:a", target_alpha, 0.8)
 
 
-# -------------------------
-# AUDIO FUNCTIONS
-# -------------------------
-
 func play_level_start_audio():
-	if ambience_player != null:
-		ambience_player.play()
-
-	if pressure_hiss_player != null:
-		pressure_hiss_player.play()
+	ambience_player.play()
+	pressure_hiss_player.play()
 
 
 func play_pickup_sound():
-	if pickup_sound != null:
-		pickup_sound.play()
+	pickup_sound.play()
 
 
 func play_drop_sound():
-	if drop_sound != null:
-		drop_sound.play()
+	drop_sound.play()
 
 
 func play_insert_sound():
-	if insert_sound != null:
-		insert_sound.play()
-
-
+	insert_sound.play()
 
 
 func play_pressure_release_sound():
-	if pressure_release_sound != null:
-		pressure_release_sound.play()
+	pressure_release_sound.play()
 
 
 func play_success_sound():
-	if pressure_hiss_player != null and pressure_hiss_player.playing:
+	if pressure_hiss_player.playing:
 		pressure_hiss_player.stop()
 
-	if success_sound != null:
-		success_sound.play()
+	success_sound.play()
 
 
 func play_error_sound():
-	if error_sound != null:
-		error_sound.play()
-
-	# PressureHissPlayer keeps playing on error.
+	error_sound.play()
 
 
 func play_door_open_sound():
-	if door_open_sound != null:
-		door_open_sound.play()
+	door_open_sound.play()

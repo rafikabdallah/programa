@@ -168,6 +168,11 @@ font_color = Color(0.23137255, 0.25882354, 0.32156864, 1)
 font_size = 6
 font_color = Color(0.3019608, 1, 0.53333336, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_b4jiv"]
+font = ExtResource("41_yxnar")
+font_size = 8
+font_color = Color(0.49411765, 0.92156863, 1, 1)
+
 [node name="MainMenu" type="Control" unique_id=1845753406]
 layout_mode = 3
 anchors_preset = 15
@@ -297,6 +302,7 @@ texture_hover = ExtResource("44_b4jiv")
 [node name="AmbiencePlayer" type="AudioStreamPlayer" parent="UISounds" unique_id=1697446980]
 stream = ExtResource("45_b4jiv")
 volume_db = 10.0
+autoplay = true
 bus = &"Ambience"
 parameters/looping = true
 
@@ -319,3 +325,12 @@ bus = &"UI"
 stream = ExtResource("48_vanrq")
 volume_db = -8.0
 bus = &"UI"
+
+[node name="ExitMessageLabel" type="Label" parent="." unique_id=1121668937]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 156.0
+offset_right = 253.0
+offset_bottom = 179.0
+text = "You can close the browser tab to exit."
+label_settings = SubResource("LabelSettings_b4jiv")

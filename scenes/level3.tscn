@@ -215,16 +215,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3aa2"]
-size = Vector2(87.5, 73)
+size = Vector2(41, 37.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ajjhh"]
-size = Vector2(68.5, 70)
+size = Vector2(38.5, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rspyr"]
-size = Vector2(61.5, 71)
+size = Vector2(40.5, 39)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmq50"]
-size = Vector2(66.75, 76.25)
+size = Vector2(34, 36.5625)
 
 [sub_resource type="LabelSettings" id="LabelSettings_d741w"]
 font = ExtResource("25_drso2")
@@ -655,7 +655,7 @@ animations = [{
 size = Vector2(40, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4niyd"]
-size = Vector2(563.75, 91)
+size = Vector2(563.75, 111)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3umqw"]
 size = Vector2(42, 283.75)
@@ -710,10 +710,10 @@ tile_map_data = PackedByteArray("AAD2////AgAAAAAAAAD2//7/AgAAAAEAAAD5//b/AgAAAAE
 tile_set = SubResource("TileSet_6sh32")
 
 [node name="DarknessOverlay" type="ColorRect" parent="." unique_id=763822398]
-offset_left = -264.0
-offset_top = -232.0
-offset_right = 409.0
-offset_bottom = 184.0
+offset_left = -262.0
+offset_top = -242.0
+offset_right = 411.0
+offset_bottom = 174.0
 color = Color(0, 0, 0, 0.5019608)
 
 [node name="lights" type="TileMapLayer" parent="." unique_id=312105038]
@@ -737,7 +737,7 @@ frame_progress = 0.6188953
 script = ExtResource("19_45e4w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/LoopMachine/SlotActionValue" unique_id=1815638009]
-position = Vector2(114, 20.5)
+position = Vector2(101, 3.375)
 shape = SubResource("RectangleShape2D_v3aa2")
 
 [node name="InsertedSprite" type="Sprite2D" parent="objects/LoopMachine/SlotActionValue" unique_id=59483045]
@@ -748,7 +748,7 @@ region_rect = Rect2(-71, 6, 32, 32)
 script = ExtResource("19_45e4w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/LoopMachine/SlotLoopVariable" unique_id=1307471538]
-position = Vector2(-57.75, -57)
+position = Vector2(-42.75, -41)
 shape = SubResource("RectangleShape2D_ajjhh")
 
 [node name="InsertedSprite" type="Sprite2D" parent="objects/LoopMachine/SlotLoopVariable" unique_id=325994470]
@@ -759,7 +759,7 @@ region_rect = Rect2(-70, -22, 32, 32)
 script = ExtResource("19_45e4w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/LoopMachine/SlotLoopOperator" unique_id=1102368178]
-position = Vector2(12.25, -57.5)
+position = Vector2(1.75, -41.5)
 shape = SubResource("RectangleShape2D_rspyr")
 
 [node name="InsertedSprite" type="Sprite2D" parent="objects/LoopMachine/SlotLoopOperator" unique_id=1730691304]
@@ -770,7 +770,7 @@ region_rect = Rect2(-32, -22, 32, 32)
 script = ExtResource("19_45e4w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/LoopMachine/SlotLoopValue" unique_id=483495888]
-position = Vector2(112.75, -58)
+position = Vector2(101, -38)
 shape = SubResource("RectangleShape2D_v3aa2")
 
 [node name="InsertedSprite" type="Sprite2D" parent="objects/LoopMachine/SlotLoopValue" unique_id=1913130684]
@@ -781,7 +781,7 @@ region_rect = Rect2(-71, 6, 32, 32)
 script = ExtResource("19_45e4w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/LoopMachine/SlotActionVariable" unique_id=68380070]
-position = Vector2(-58.25, 23)
+position = Vector2(-40, 2)
 shape = SubResource("RectangleShape2D_gmq50")
 
 [node name="InsertedSprite" type="Sprite2D" parent="objects/LoopMachine/SlotActionVariable" unique_id=1148250933]
@@ -792,7 +792,7 @@ region_rect = Rect2(-32, 7, 32, 32)
 script = ExtResource("19_45e4w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/LoopMachine/SlotActionOperator" unique_id=427255664]
-position = Vector2(14.625, 21)
+position = Vector2(-1, 2)
 shape = SubResource("RectangleShape2D_gmq50")
 
 [node name="InsertedSprite" type="Sprite2D" parent="objects/LoopMachine/SlotActionOperator" unique_id=64955529]
@@ -897,10 +897,12 @@ position = Vector2(358, -17)
 shape = SubResource("RectangleShape2D_rbn78")
 
 [node name="E-lis" type="CharacterBody2D" parent="objects" unique_id=1734399067]
+z_index = 10
 script = ExtResource("33_ouw68")
 speed = 150.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="objects/E-lis" unique_id=1464138937]
+z_index = 10
 position = Vector2(267, -71)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_u068y")
@@ -908,10 +910,12 @@ animation = &"up"
 frame_progress = 0.30299926
 
 [node name="Holder" type="AnimatedSprite2D" parent="objects/E-lis" unique_id=1029898867]
+z_index = 10
 position = Vector2(268, -95)
 sprite_frames = SubResource("SpriteFrames_3umqw")
 
 [node name="CarriedValue" type="Sprite2D" parent="objects/E-lis/Holder" unique_id=1486867934]
+z_index = 10
 position = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/E-lis" unique_id=2042111242]
@@ -926,6 +930,7 @@ position = Vector2(235, -77)
 shape = SubResource("RectangleShape2D_phfsf")
 
 [node name="InteractionHintBox" type="PanelContainer" parent="objects/E-lis" unique_id=799781122]
+z_index = 5
 offset_left = 191.0
 offset_top = -103.0
 offset_right = 239.0
@@ -1009,7 +1014,7 @@ shape = SubResource("RectangleShape2D_ouw68")
 [node name="TopWall" type="StaticBody2D" parent="RoomCollision" unique_id=1712346520]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomCollision/TopWall" unique_id=493323835]
-position = Vector2(7.125, -183.5)
+position = Vector2(7.125, -173.5)
 shape = SubResource("RectangleShape2D_4niyd")
 
 [node name="RightWall" type="StaticBody2D" parent="RoomCollision" unique_id=1278894710]
@@ -1032,6 +1037,7 @@ shape = SubResource("RectangleShape2D_p71k4")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1908145439]
 layer = 10
+visible = false
 follow_viewport_enabled = true
 
 [node name="UIRoot" type="Control" parent="UI" unique_id=351323397]

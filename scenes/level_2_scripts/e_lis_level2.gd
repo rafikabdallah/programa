@@ -157,7 +157,8 @@ func drop_carried_piece():
 		return
 
 	if carried_piece_source != null:
-		carried_piece_source.return_to_origin()
+		var drop_position = anim.global_position + Vector2(32, 0)
+		carried_piece_source.drop_at_position(drop_position)
 
 	carried_piece_data = null
 	carried_piece_source = null

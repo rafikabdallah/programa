@@ -137,7 +137,8 @@ func drop_carried_value():
 		return
 
 	if carried_value_source != null:
-		carried_value_source.return_to_origin()
+		var drop_position = anim.global_position + Vector2(32, 0)
+		carried_value_source.drop_at_position(drop_position)
 
 	var level = get_tree().current_scene
 	if level.has_method("play_drop_sound"):

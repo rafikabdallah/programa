@@ -29,10 +29,21 @@ func pick_up():
 		"source": self
 	}
 
-
 func return_to_origin():
 	picked = false
 	global_position = original_position
+	visible = true
+	monitoring = true
+	monitorable = true
+	collision_shape.disabled = false
+
+
+func drop_at_position(drop_global_position: Vector2):
+	picked = false
+
+	var visual_offset = sprite.global_position - global_position
+	global_position = drop_global_position - visual_offset
+
 	visible = true
 	monitoring = true
 	monitorable = true

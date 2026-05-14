@@ -513,7 +513,7 @@ size = Vector2(33, 46.25)
 size = Vector2(23, 27.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4niyd"]
-size = Vector2(523.75, 91)
+size = Vector2(564.75, 112)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3umqw"]
 size = Vector2(68, 395.75)
@@ -635,7 +635,6 @@ shape = SubResource("RectangleShape2D_1ooyw")
 
 [node name="Value5" type="Area2D" parent="objects" unique_id=1485449106]
 script = ExtResource("14_3w4mx")
-value = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="objects/Value5" unique_id=1168935406]
 position = Vector2(173, 47)
@@ -658,6 +657,7 @@ position = Vector2(-105, -26)
 shape = SubResource("RectangleShape2D_mq0oc")
 
 [node name="E-lis" type="CharacterBody2D" parent="objects" unique_id=1734399067]
+z_index = 10
 script = ExtResource("18_ai3nx")
 speed = 150.0
 
@@ -669,10 +669,12 @@ animation = &"up"
 frame_progress = 0.30299926
 
 [node name="Holder" type="AnimatedSprite2D" parent="objects/E-lis" unique_id=1029898867]
+z_index = 5
 position = Vector2(315, -98)
 sprite_frames = SubResource("SpriteFrames_3umqw")
 
 [node name="CarriedValue" type="Sprite2D" parent="objects/E-lis/Holder" unique_id=1486867934]
+z_index = 10
 position = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="objects/E-lis" unique_id=2042111242]
@@ -687,6 +689,7 @@ position = Vector2(283, -82)
 shape = SubResource("RectangleShape2D_phfsf")
 
 [node name="InteractionHintBox" type="PanelContainer" parent="objects/E-lis" unique_id=799781122]
+z_index = 5
 offset_left = 239.0
 offset_top = -114.0
 offset_right = 287.0
@@ -748,7 +751,7 @@ shape = SubResource("RectangleShape2D_i3v6o")
 [node name="TopWall" type="StaticBody2D" parent="RoomCollision" unique_id=1712346520]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomCollision/TopWall" unique_id=493323835]
-position = Vector2(-12.875, -183.5)
+position = Vector2(7.625, -173)
 shape = SubResource("RectangleShape2D_4niyd")
 
 [node name="RightWall" type="StaticBody2D" parent="RoomCollision" unique_id=1278894710]

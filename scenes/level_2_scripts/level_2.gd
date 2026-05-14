@@ -72,7 +72,7 @@ func _ready():
 	play_level_start_audio()
 	play_level_start_animations()
 
-	display_label.show_message("PRESSURE TOO HIGH\nCURRENT: 20\nSAFE MAX: 15")
+	display_label.show_message("PRESSURE TOO HIGH\nCURRENT: 16\nSAFE MAX: 15")
 
 
 func update_if_machine_state():

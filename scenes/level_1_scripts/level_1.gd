@@ -59,7 +59,8 @@ func _ready():
 
 	try_again_button.pressed.connect(restart_level)
 	next_button.pressed.connect(open_door_from_panel)
-	exit_trigger.body_entered.connect(_on_exit_trigger_body_entered)
+	if not exit_trigger.body_entered.is_connected(_on_exit_trigger_body_entered):
+		exit_trigger.body_entered.connect(_on_exit_trigger_body_entered)
 
 	set_waiting_state()
 

@@ -1,0 +1,34 @@
+{
+  "resolution": "320x180",
+  "positions": {
+    "logo": [
+      10,
+      18
+    ],
+    "subtitle": [
+      15,
+      55
+    ],
+    "start": [
+      22,
+      76
+    ],
+    "about": [
+      22,
+      108
+    ],
+    "exit": [
+      22,
+      140
+    ],
+    "version": [
+      8,
+      164
+    ],
+    "about_panel": [
+      77,
+      35
+    ]
+  },
+  "import": "Filter Off / Nearest, Mipmaps Off, Lossless"
+}

@@ -5,6 +5,17 @@ var target_oxygen := 10
 var level_finished := false
 var checking_rule := false
 
+
+@onready var voice_player: AudioStreamPlayer = $VoicePlayer
+
+@export var voice_level_start: AudioStream
+@export var voice_success: AudioStream
+@export var voice_fail: AudioStream
+
+var voice_repeat_time := 14.0
+var voice_repeat_active := false
+var voice_solved := false
+
 @export var success_panel_texture: Texture2D
 @export var fail_panel_texture: Texture2D
 @export var next_scene_path := "res://scenes/ending_screen.tscn"
@@ -52,6 +63,7 @@ var checking_rule := false
 
 
 func _ready():
+	start_voice_loop()
 	oxygen = 0
 	target_oxygen = 10
 	level_finished = false
@@ -148,6 +160,7 @@ func run_success_sequence():
 		lights.modulate = Color.html("#FFD84D")
 
 	display_label.show_message("LOOP ACCEPTED\nFILLING OXYGEN")
+	play_success_voice()
 
 	while oxygen < target_oxygen:
 		await get_tree().create_timer(0.45).timeout
@@ -190,6 +203,7 @@ func show_fail_state():
 		darkness_overlay.color.a = 0.45
 
 	display_label.show_message("LOOP ERROR\nOXYGEN NOT STABLE")
+	play_fail_voice()
 
 	result_panel.visible = true
 	panel_image.visible = true
@@ -268,7 +282,7 @@ func unlock_exit_after_success():
 
 func _on_exit_trigger_body_entered(body):
 	if body is CharacterBody2D:
-		get_tree().change_scene_to_file(next_scene_path)
+		LoadingManager.load_scene(next_scene_path)
 
 
 func fade_darkness_to(target_alpha: float):
@@ -381,3 +395,36 @@ func play_error_sound():
 func play_door_open_sound():
 	if door_open_sound != null:
 		door_open_sound.play()
+		
+func play_voice(stream: AudioStream):
+	if stream == null:
+		return
+
+	voice_player.stop()
+	voice_player.stream = stream
+	voice_player.volume_db = -7
+	voice_player.play()
+
+
+func start_voice_loop():
+	voice_repeat_active = true
+	voice_solved = false
+
+	play_voice(voice_level_start)
+
+	while voice_repeat_active and not voice_solved:
+		await get_tree().create_timer(voice_repeat_time).timeout
+
+		if voice_repeat_active and not voice_solved:
+			play_voice(voice_level_start)
+
+
+func play_success_voice():
+	voice_solved = true
+	voice_repeat_active = false
+	play_voice(voice_success)
+
+
+func play_fail_voice():
+	voice_repeat_active = false
+	play_voice(voice_fail)

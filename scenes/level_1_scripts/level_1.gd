@@ -2,6 +2,16 @@ extends Node2D
 
 var current_x = null
 
+@onready var voice_player: AudioStreamPlayer = $VoicePlayer
+
+@export var voice_level_start: AudioStream
+@export var voice_success: AudioStream
+@export var voice_fail: AudioStream
+
+var voice_repeat_time := 14.0
+var voice_repeat_active := false
+var voice_solved := false
+
 @onready var display_label: Label = $objects/display_screen/DisplayLabel
 @onready var light_layer: TileMapLayer = $lights
 @onready var darkness_overlay: ColorRect = $DarknessOverlay
@@ -35,12 +45,14 @@ var current_x = null
 @onready var door_open_sound: AudioStreamPlayer = $SoundPlayers/DoorOpenSound
 @onready var drop_sound: AudioStreamPlayer = $SoundPlayers/DropSound
 
+
 var guide_active := true
 var blink_timer := 0.0
 
 
 func _ready():
 	ambience_player.play()
+	start_voice_loop()
 
 	guide_panel.visible = true
 	continue_hint.visible = true
@@ -124,6 +136,7 @@ func set_success_state():
 	success_sound.play()
 
 	display_label.show_message("x = 2\npower restoring /\\")
+	play_success_voice()
 
 	play_if_exists(battery_anim, "recharge")
 	await get_tree().create_timer(1.0).timeout
@@ -141,6 +154,7 @@ func set_error_state():
 	error_sound.play()
 
 	display_label.show_message("too much power\nsystem error")
+	play_fail_voice()
 
 	await get_tree().create_timer(1.0).timeout
 	show_fail_result()
@@ -237,4 +251,39 @@ func _on_exit_trigger_body_entered(body: Node2D) -> void:
 	if body.name == "E-lis":
 		body.visible = false
 		await get_tree().create_timer(0.4).timeout
-		get_tree().change_scene_to_file("res://scenes/level2.tscn")
+		LoadingManager.load_scene("res://scenes/level2.tscn")
+		
+		
+		
+func play_voice(stream: AudioStream):
+	if stream == null:
+		return
+
+	voice_player.stop()
+	voice_player.stream = stream
+	voice_player.volume_db = -7
+	voice_player.play()
+
+
+func start_voice_loop():
+	voice_repeat_active = true
+	voice_solved = false
+
+	play_voice(voice_level_start)
+
+	while voice_repeat_active and not voice_solved:
+		await get_tree().create_timer(voice_repeat_time).timeout
+
+		if voice_repeat_active and not voice_solved:
+			play_voice(voice_level_start)
+
+
+func play_success_voice():
+	voice_solved = true
+	voice_repeat_active = false
+	play_voice(voice_success)
+
+
+func play_fail_voice():
+	voice_repeat_active = false
+	play_voice(voice_fail)

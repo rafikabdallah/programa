@@ -37,7 +37,7 @@ func _ready():
 func _on_start_button_pressed():
 	play_press_sound()
 	await get_tree().create_timer(0.12).timeout
-	get_tree().change_scene_to_file(intro_scene_path)
+	LoadingManager.load_scene(intro_scene_path)
 
 
 func _on_about_button_pressed():

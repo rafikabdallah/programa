@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cchunsrqjal8k" path="res://scenes/level_3_scripts/level_3.gd" id="1_ifdtx"]
 [ext_resource type="Texture2D" uid="uid://dry1scyojejx6" path="res://sprite/ui/simple_result_panel_assets/ResultPanel_Success_Empty_176x88.png" id="2_6x0jh"]
+[ext_resource type="AudioStream" uid="uid://bauy7fwstlai" path="res://audio/voice/voice_l3_oxygen_low.wav" id="2_21itn"]
 [ext_resource type="Texture2D" uid="uid://dq87ad7h6ry4h" path="res://sprite/ui/simple_result_panel_assets/ResultPanel_Fail_Empty_176x88.png" id="3_o0jvo"]
+[ext_resource type="AudioStream" uid="uid://se1u38b3pbbp" path="res://audio/voice/voice_l3_life_support_online.wav" id="3_o24p4"]
 [ext_resource type="Texture2D" uid="uid://djwhtil6nc0vw" path="res://sprite/word_sprite/New Piskel-1.png.png" id="4_18jig"]
+[ext_resource type="AudioStream" uid="uid://bcodt641o0562" path="res://audio/voice/voice_l3_fail_loop_error.wav" id="4_i32te"]
 [ext_resource type="Texture2D" uid="uid://bw7ey1i8g3ck2" path="res://sprite/New Piskel.png" id="5_apw67"]
 [ext_resource type="Script" uid="uid://b5gc26abkfqay" path="res://scenes/level_3_scripts/loop_machine.gd" id="6_45e4w"]
 [ext_resource type="Texture2D" uid="uid://crayyddcpeex6" path="res://sprite/cables.png" id="6_llmex"]
@@ -110,15 +113,26 @@
 [ext_resource type="Texture2D" uid="uid://c1lnv3qkwabij" path="res://sprite/level3/level3_unique_loop_assets/frames/LifePod_waking_02_56x56.png" id="97_jhje3"]
 [ext_resource type="Texture2D" uid="uid://d2oh83hrug8eq" path="res://sprite/level3/level3_unique_loop_assets/frames/LifePod_waking_03_56x56.png" id="98_rkpai"]
 [ext_resource type="AudioStream" uid="uid://batvsgs7llslt" path="res://audio/player/pickup_value.wav" id="110_34mcc"]
+[ext_resource type="Script" uid="uid://cy45u2juega4k" path="res://scenes/mobile_controls.gd" id="110_jatqo"]
 [ext_resource type="AudioStream" uid="uid://dnqk355rg4b5k" path="res://audio/machine/insert_slot.wav" id="111_ajjhh"]
+[ext_resource type="Texture2D" uid="uid://dvrnodrfol4ay" path="res://sprite/PROGRAMA_mobile_touch_controls/ArrowUp_Normal.png" id="111_e1tf6"]
+[ext_resource type="Texture2D" uid="uid://bjqliupatm86c" path="res://sprite/PROGRAMA_mobile_touch_controls/ArrowUp_Pressed.png" id="112_8ide4"]
 [ext_resource type="AudioStream" uid="uid://3vyboyo44edo" path="res://audio/ui/success_system.wav" id="112_tliwx"]
 [ext_resource type="AudioStream" uid="uid://chxyl6km6lxsh" path="res://audio/machine/error_system.wav" id="113_5lxcx"]
+[ext_resource type="Texture2D" uid="uid://6c6wg736u0uh" path="res://sprite/PROGRAMA_mobile_touch_controls/ArrowDown_Normal.png" id="113_21itn"]
+[ext_resource type="Texture2D" uid="uid://qn4jvqpx43oj" path="res://sprite/PROGRAMA_mobile_touch_controls/ArrowDown_Pressed.png" id="114_o24p4"]
 [ext_resource type="AudioStream" uid="uid://bt6qgweb3wlvp" path="res://audio/machine/door_open.wav" id="114_wiwsm"]
 [ext_resource type="AudioStream" uid="uid://dst72f2wck3i1" path="res://audio/player/drop_value.wav" id="115_i23gg"]
+[ext_resource type="Texture2D" uid="uid://nqjwq2ui5phc" path="res://sprite/PROGRAMA_mobile_touch_controls/ArrowLeft_Normal.png" id="115_i32te"]
+[ext_resource type="Texture2D" uid="uid://d2oirxq35vx7s" path="res://sprite/PROGRAMA_mobile_touch_controls/ArrowLeft_Pressed.png" id="116_riqpb"]
 [ext_resource type="AudioStream" uid="uid://bdas8rgkoxbfm" path="res://audio/level_specific/oxygen_pulse.wav" id="116_tcob4"]
 [ext_resource type="AudioStream" uid="uid://cgjdeyoe2srnv" path="res://audio/level_specific/life_pod_on.wav" id="117_bgltu"]
+[ext_resource type="Texture2D" uid="uid://blyp087gnlwey" path="res://sprite/PROGRAMA_mobile_touch_controls/ArrowRight_Normal.png" id="117_wgoj8"]
 [ext_resource type="AudioStream" uid="uid://cp8hmevgsx71i" path="res://audio/level_specific/oxygen_fill_loop.ogg" id="118_b0aph"]
+[ext_resource type="Texture2D" uid="uid://bnoqhuit6lj87" path="res://sprite/PROGRAMA_mobile_touch_controls/ArrowRight_Pressed.png" id="118_dw37e"]
+[ext_resource type="Texture2D" uid="uid://qdnaiw8rbawl" path="res://sprite/PROGRAMA_mobile_touch_controls/ActionButton_Normal_96x32.png" id="119_mu3mo"]
 [ext_resource type="AudioStream" uid="uid://jc7s63wyjwfp" path="res://audio/ambience/ambience_room_loop.ogg" id="119_rnw6a"]
+[ext_resource type="Texture2D" uid="uid://b8jkea55w28y7" path="res://sprite/PROGRAMA_mobile_touch_controls/ActionButton_Pressed_96x32.png" id="120_aetqu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m7ahb"]
 texture = ExtResource("4_18jig")
@@ -654,6 +668,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ouw68"]
 size = Vector2(40, 40)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jatqo"]
+bg_color = Color(0.043137256, 0.0627451, 0.1254902, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e1tf6"]
+font = ExtResource("48_ygy55")
+font_color = Color(0.3529412, 0.8039216, 0.8862745, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4niyd"]
 size = Vector2(563.75, 111)
 
@@ -681,8 +702,16 @@ line_spacing = 2.0
 font = ExtResource("25_drso2")
 font_size = 10
 
+[sub_resource type="LabelSettings" id="LabelSettings_ygy55"]
+font = ExtResource("25_drso2")
+font_size = 12
+font_color = Color(0.49411765, 0.92156863, 1, 1)
+
 [node name="level3" type="Node2D" unique_id=282607674]
 script = ExtResource("1_ifdtx")
+voice_level_start = ExtResource("2_21itn")
+voice_success = ExtResource("3_o24p4")
+voice_fail = ExtResource("4_i32te")
 success_panel_texture = ExtResource("2_6x0jh")
 fail_panel_texture = ExtResource("3_o0jvo")
 metadata/_edit_vertical_guides_ = [73.0]
@@ -1009,6 +1038,26 @@ frame_progress = 0.6061656
 position = Vector2(-168, 88)
 shape = SubResource("RectangleShape2D_ouw68")
 
+[node name="if" type="Label" parent="objects" unique_id=1933579854]
+offset_left = -93.0
+offset_top = -46.0
+offset_right = -58.0
+offset_bottom = -30.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jatqo")
+text = "while"
+label_settings = SubResource("LabelSettings_e1tf6")
+
+[node name="then" type="Label" parent="objects" unique_id=315391223]
+offset_left = -86.0
+offset_top = -8.0
+offset_right = -62.0
+offset_bottom = 8.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jatqo")
+text = "do"
+label_settings = SubResource("LabelSettings_e1tf6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="RoomCollision" type="Node2D" parent="." unique_id=1739495446]
 
 [node name="TopWall" type="StaticBody2D" parent="RoomCollision" unique_id=1712346520]
@@ -1173,6 +1222,71 @@ texture_normal = ExtResource("92_mhwsb")
 texture_pressed = ExtResource("93_kd1bl")
 texture_hover = ExtResource("94_rgkqo")
 
+[node name="MobileControls" type="Control" parent="UI/UIRoot" unique_id=788567698]
+anchors_preset = 0
+offset_left = 124.66667
+offset_top = 172.66667
+offset_right = 164.66667
+offset_bottom = 212.66667
+script = ExtResource("110_jatqo")
+
+[node name="UpButton" type="TextureButton" parent="UI/UIRoot/MobileControls" unique_id=1499892075]
+layout_mode = 0
+offset_left = -44.000004
+offset_top = -1.9999999
+offset_right = -12.000004
+offset_bottom = 30.0
+texture_normal = ExtResource("111_e1tf6")
+texture_pressed = ExtResource("112_8ide4")
+
+[node name="DownButton" type="TextureButton" parent="UI/UIRoot/MobileControls" unique_id=271834675]
+layout_mode = 0
+offset_left = -45.333332
+offset_top = 30.666664
+offset_right = -11.999996
+offset_bottom = 63.333332
+texture_normal = ExtResource("113_21itn")
+texture_pressed = ExtResource("114_o24p4")
+
+[node name="LeftButton" type="TextureButton" parent="UI/UIRoot/MobileControls" unique_id=2043520419]
+layout_mode = 0
+offset_left = -74.666664
+offset_top = 14.0
+offset_right = -42.666664
+offset_bottom = 46.0
+texture_normal = ExtResource("115_i32te")
+texture_pressed = ExtResource("116_riqpb")
+
+[node name="RightButton" type="TextureButton" parent="UI/UIRoot/MobileControls" unique_id=2069158744]
+layout_mode = 0
+offset_left = -13.333334
+offset_top = 14.666666
+offset_right = 18.666666
+offset_bottom = 46.666664
+texture_normal = ExtResource("117_wgoj8")
+texture_pressed = ExtResource("118_dw37e")
+
+[node name="ActionLabel" type="Label" parent="UI/UIRoot/MobileControls" unique_id=1018295068]
+z_index = 2
+layout_mode = 0
+offset_left = 42.666664
+offset_top = 37.333336
+offset_right = 117.33334
+offset_bottom = 54.66667
+text = "fff"
+label_settings = SubResource("LabelSettings_ygy55")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActionButton" type="TextureButton" parent="UI/UIRoot/MobileControls" unique_id=334518261]
+layout_mode = 0
+offset_left = 31.333334
+offset_top = 28.666666
+offset_right = 127.333336
+offset_bottom = 60.666664
+texture_normal = ExtResource("119_mu3mo")
+texture_pressed = ExtResource("120_aetqu")
+
 [node name="SoundPlayers" type="Node2D" parent="." unique_id=1245841720]
 
 [node name="PickupSound" type="AudioStreamPlayer" parent="SoundPlayers" unique_id=1995697232]
@@ -1225,6 +1339,8 @@ stream = ExtResource("119_rnw6a")
 volume_db = 10.0
 autoplay = true
 bus = &"Ambience"
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="." unique_id=1134048371]
 
 [connection signal="area_entered" from="objects/E-lis/PickupDetector" to="objects/E-lis" method="_on_pickup_detector_area_entered"]
 [connection signal="area_exited" from="objects/E-lis/PickupDetector" to="objects/E-lis" method="_on_pickup_detector_area_exited"]

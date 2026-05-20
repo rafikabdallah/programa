@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmgwuhmvhv3ej"
-path="res://.godot/imported/ChatGPT Image May 9, 2026, 10_58_32 AM.png-d9c697ba837d59d71a7952a2385a99a3.ctex"
+uid="uid://bialsbycn3ns2"
+path="res://.godot/imported/Button_About_Normal_112x24.png-44db0da6586d2fab09b3a3a7b748f80d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/mainmenu/ChatGPT Image May 9, 2026, 10_58_32 AM.png"
-dest_files=["res://.godot/imported/ChatGPT Image May 9, 2026, 10_58_32 AM.png-d9c697ba837d59d71a7952a2385a99a3.ctex"]
+source_file="res://sprite/mainmenu/main_menu2/Button_About_Normal_112x24.png"
+dest_files=["res://.godot/imported/Button_About_Normal_112x24.png-44db0da6586d2fab09b3a3a7b748f80d.ctex"]
 
 [params]
 
@@ -25,16 +25,16 @@ compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
 mipmaps/limit=-1
-roughness/mode=0
+roughness/mode=1
 roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2
 process/channel_remap/alpha=3
-process/fix_alpha_border=true
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

@@ -1,0 +1,65 @@
+[
+  {
+    "file": "voice_l1_needs_power_2.wav",
+    "text": "Power core offline. Need power: two.",
+    "duration_seconds": 3.92,
+    "source_start_ms": 150,
+    "source_end_ms": 3870
+  },
+  {
+    "file": "voice_l1_power_restored.wav",
+    "text": "Power core restored. Door unlocked.",
+    "duration_seconds": 3.42,
+    "source_start_ms": 4400,
+    "source_end_ms": 7620
+  },
+  {
+    "file": "voice_l1_fail_wrong_power.wav",
+    "text": "Power overload. Wrong value inserted.",
+    "duration_seconds": 3.66,
+    "source_start_ms": 8150,
+    "source_end_ms": 11610
+  },
+  {
+    "file": "voice_l2_pressure_high.wav",
+    "text": "Pressure unsafe. Reduce pressure to fifteen.",
+    "duration_seconds": 4.07,
+    "source_start_ms": 12170,
+    "source_end_ms": 16040
+  },
+  {
+    "file": "voice_l2_pressure_stable.wav",
+    "text": "Pressure stable. System safe.",
+    "duration_seconds": 3.25,
+    "source_start_ms": 16550,
+    "source_end_ms": 19600
+  },
+  {
+    "file": "voice_l2_fail_pressure_rule.wav",
+    "text": "Pressure rule unsafe. System still unstable.",
+    "duration_seconds": 4.22,
+    "source_start_ms": 20250,
+    "source_end_ms": 24270
+  },
+  {
+    "file": "voice_l3_oxygen_low.wav",
+    "text": "Oxygen low. Fill oxygen to ten.",
+    "duration_seconds": 3.87,
+    "source_start_ms": 24760,
+    "source_end_ms": 28430
+  },
+  {
+    "file": "voice_l3_life_support_online.wav",
+    "text": "Oxygen stable. Life support online.",
+    "duration_seconds": 3.81,
+    "source_start_ms": 28890,
+    "source_end_ms": 32500
+  },
+  {
+    "file": "voice_l3_fail_loop_error.wav",
+    "text": "Loop error. Oxygen not restored.",
+    "duration_seconds": 3.41,
+    "source_start_ms": 33000,
+    "source_end_ms": 36210
+  }
+]

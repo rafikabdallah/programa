@@ -11,6 +11,7 @@ var input_enabled := true
 var step_timer := 0.0
 var step_interval := 0.32
 var use_step_one := true
+var current_mobile_action := ""
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var holder: AnimatedSprite2D = $Holder
@@ -23,6 +24,7 @@ var use_step_one := true
 
 
 func _ready():
+	add_to_group("player")
 	holder.visible = false
 	carried_sprite.visible = false
 	interaction_hint_box.visible = false
@@ -34,6 +36,7 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
+
 
 	var direction := Vector2.ZERO
 
@@ -49,6 +52,11 @@ func _physics_process(delta):
 	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP):
 		direction.y -= 1
 
+	var mobile_direction = get_mobile_move_vector()
+
+	if mobile_direction != Vector2.ZERO:
+		direction = mobile_direction
+
 	direction = direction.normalized()
 	velocity = direction * speed
 	move_and_slide()
@@ -57,6 +65,10 @@ func _physics_process(delta):
 	update_step_sound(delta, direction)
 
 
+
+
+
+		
 func _process(_delta):
 	if input_enabled == false:
 		return
@@ -153,29 +165,32 @@ func drop_carried_value():
 
 	update_interaction_hint()
 
-
 func update_interaction_hint():
 	if input_enabled == false:
 		interaction_hint_box.visible = false
+		set_mobile_action("", "")
 		return
 
 	if carried_value == null:
 		if nearby_value != null:
 			interaction_hint_box.visible = true
 			interaction_hint.text = "Press X To Pick"
+			set_mobile_action("Pick", "pick")
 		else:
 			interaction_hint_box.visible = false
+			set_mobile_action("", "")
 		return
 
 	if carried_value != null:
 		if nearby_slot != null:
 			interaction_hint_box.visible = true
 			interaction_hint.text = "Press Space To Insert"
+			set_mobile_action("Insert", "insert")
 		else:
 			interaction_hint_box.visible = true
-			interaction_hint.text = "Press E to Drop"
+			interaction_hint.text = "Press E To Drop"
+			set_mobile_action("Drop", "drop")
 		return
-
 
 func update_animation(direction: Vector2):
 	if direction == Vector2.ZERO:
@@ -242,3 +257,42 @@ func _on_pickup_detector_area_exited(area):
 		nearby_slot = null
 
 	update_interaction_hint()
+	
+	
+	
+	
+func get_mobile_move_vector() -> Vector2:
+	var controls = get_tree().get_nodes_in_group("mobile_controls")
+
+	if controls.size() == 0:
+		return Vector2.ZERO
+
+	return controls[0].get_move_vector()
+
+
+func set_mobile_action(button_text: String, action_name: String):
+	current_mobile_action = action_name
+
+	var controls = get_tree().get_nodes_in_group("mobile_controls")
+
+	if controls.size() == 0:
+		return
+
+	controls[0].set_action_button(button_text, action_name != "")
+
+
+func mobile_action_pressed():
+	if input_enabled == false:
+		return
+
+	if current_mobile_action == "pick":
+		pick_up_value()
+		return
+
+	if current_mobile_action == "insert":
+		insert_into_slot()
+		return
+
+	if current_mobile_action == "drop":
+		drop_carried_value()
+		return

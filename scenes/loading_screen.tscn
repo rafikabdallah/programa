@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://yl2pqlm6rc25"]
+
+[ext_resource type="Script" uid="uid://bdcute461v0l5" path="res://scenes/loading_script/loading_screen.gd" id="1_amnj2"]
+[ext_resource type="Texture2D" uid="uid://dm810w8rw2f8y" path="res://ChatGPT Image May 17, 2026, 11_59_18 AM.png" id="1_ep5rh"]
+[ext_resource type="Texture2D" uid="uid://tun644cqmef4" path="res://sprite/PROGRAMA_loading_scene_assets/LoadingBar_Frame_01_160x20.png" id="2_5slh2"]
+[ext_resource type="Texture2D" uid="uid://dbcsrv2wvwm6a" path="res://sprite/PROGRAMA_loading_scene_assets/LoadingBar_Frame_02_160x20.png" id="3_pvqkx"]
+[ext_resource type="Texture2D" uid="uid://br6cesfoi784s" path="res://sprite/PROGRAMA_loading_scene_assets/LoadingBar_Frame_03_160x20.png" id="4_e7oyx"]
+[ext_resource type="Texture2D" uid="uid://ce2kf4v4qu0vj" path="res://sprite/PROGRAMA_loading_scene_assets/LoadingBar_Frame_04_160x20.png" id="5_bqhjm"]
+[ext_resource type="Texture2D" uid="uid://xts0wuljs0ng" path="res://sprite/PROGRAMA_loading_scene_assets/LoadingBar_Frame_05_160x20.png" id="6_hdkap"]
+[ext_resource type="Texture2D" uid="uid://dffoqcqdmwmjc" path="res://sprite/PROGRAMA_loading_scene_assets/LoadingBar_Frame_06_160x20.png" id="7_eb3t5"]
+[ext_resource type="Texture2D" uid="uid://dfv22i2fj3aly" path="res://sprite/PROGRAMA_loading_scene_assets/LoadingBar_Frame_07_160x20.png" id="8_ummuf"]
+[ext_resource type="Texture2D" uid="uid://dj2voqiwj773m" path="res://sprite/PROGRAMA_loading_scene_assets/LoadingBar_Frame_08_160x20.png" id="9_i8ls2"]
+[ext_resource type="FontFile" uid="uid://cylu4n245lnk7" path="res://sprite/fonts/pixel_operator/PixelOperatorSC.ttf" id="10_gcv3i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lokel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5slh2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pvqkx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e7oyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bqhjm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hdkap")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_eb3t5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ummuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_i8ls2")
+}],
+"loop": true,
+"name": &"loading",
+"speed": 4.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_amnj2"]
+font = ExtResource("10_gcv3i")
+font_color = Color(0.20784314, 0.8156863, 1, 1)
+
+[node name="LoadingScreen" type="Control" unique_id=561748630]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_amnj2")
+
+[node name="Background" type="TextureRect" parent="." unique_id=793600031]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("1_ep5rh")
+expand_mode = 2
+
+[node name="LoadingBar" type="AnimatedSprite2D" parent="." unique_id=644517286]
+position = Vector2(157, 162)
+sprite_frames = SubResource("SpriteFrames_lokel")
+animation = &"loading"
+frame_progress = 0.9571931
+
+[node name="LoadingLabel" type="Label" parent="." unique_id=1417288004]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 135.0
+offset_right = 190.0
+offset_bottom = 151.0
+text = "LOADING..."
+label_settings = SubResource("LabelSettings_amnj2")

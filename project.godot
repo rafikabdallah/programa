@@ -11,11 +11,16 @@ config_version=5
 [application]
 
 config/name="programa"
+config/version="V1.03"
 run/main_scene="uid://bu7jakkf46l36"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0.043137256, 0.0627451, 0.1254902, 1)
-boot_splash/image="uid://hkt3ew0jvorx"
-config/icon="uid://hkt3ew0jvorx"
+boot_splash/image="uid://dm810w8rw2f8y"
+config/icon="uid://cuidr5w1h0vhk"
+
+[autoload]
+
+LoadingManager="*uid://bqttcolwakisk"
 
 [display]
 

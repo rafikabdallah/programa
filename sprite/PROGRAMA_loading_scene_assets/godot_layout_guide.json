@@ -1,0 +1,28 @@
+{
+  "backgrounds": [
+    "LoadingBackground_320x180.png",
+    "LoadingBackground_960x540.png",
+    "LoadingBackground_1920x1080.png"
+  ],
+  "loading_bar_sheet": {
+    "file": "LoadingBar_Sheet_8x_160x20.png",
+    "frame_size": "160x20",
+    "frames": 8,
+    "fps": 8,
+    "position_320x180": {
+      "x": 80,
+      "y": 154
+    }
+  },
+  "loading_text_sheet": {
+    "file": "LoadingText_Sheet_4x_104x16.png",
+    "frame_size": "104x16",
+    "frames": 4,
+    "fps": 4,
+    "position_320x180": {
+      "x": 108,
+      "y": 138
+    }
+  },
+  "godot_import": "Filter Off / Nearest, Mipmaps Off, Lossless"
+}

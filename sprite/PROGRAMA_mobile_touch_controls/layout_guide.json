@@ -1,0 +1,35 @@
+{
+  "resolution": "320x180",
+  "arrows": {
+    "up": {
+      "x": 48,
+      "y": 96,
+      "size": "32x32"
+    },
+    "left": {
+      "x": 16,
+      "y": 128,
+      "size": "32x32"
+    },
+    "down": {
+      "x": 48,
+      "y": 128,
+      "size": "32x32"
+    },
+    "right": {
+      "x": 80,
+      "y": 128,
+      "size": "32x32"
+    }
+  },
+  "action_button": {
+    "x": 208,
+    "y": 128,
+    "size": "96x32"
+  },
+  "godot_notes": {
+    "node_type": "TextureButton",
+    "import": "Filter Off / Nearest, Mipmaps Off, Lossless",
+    "action_button_text": "Add dynamic Label text in Godot."
+  }
+}

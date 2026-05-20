@@ -12,6 +12,7 @@ var carried_piece_source = null
 var step_timer := 0.0
 var use_step_one := true
 var interaction_enabled := true
+var current_mobile_action := ""
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var holder: AnimatedSprite2D = $Holder
@@ -24,6 +25,7 @@ var interaction_enabled := true
 
 
 func _ready():
+	add_to_group("player")
 	holder.visible = false
 	carried_sprite.visible = false
 	interaction_hint_box.visible = false
@@ -44,6 +46,11 @@ func _physics_process(delta):
 
 	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP):
 		direction.y -= 1
+		
+	var mobile_direction = get_mobile_move_vector()
+
+	if mobile_direction != Vector2.ZERO:
+		direction = mobile_direction
 
 	direction = direction.normalized()
 	velocity = direction * speed
@@ -227,26 +234,32 @@ func get_best_filled_nearby_slot():
 func update_interaction_hint():
 	if interaction_enabled == false:
 		interaction_hint_box.visible = false
+		set_mobile_action("", "")
 		return
 
 	if carried_piece_data == null:
 		if nearby_value != null:
 			interaction_hint_box.visible = true
 			interaction_hint.text = "Press X To Pick"
+			set_mobile_action("Pick", "pick")
 		elif get_best_filled_nearby_slot() != null:
 			interaction_hint_box.visible = true
 			interaction_hint.text = "Press R To Retrieve"
+			set_mobile_action("Retrieve", "retrieve")
 		else:
 			interaction_hint_box.visible = false
+			set_mobile_action("", "")
 		return
 
 	if carried_piece_data != null:
 		if get_best_empty_nearby_slot() != null:
 			interaction_hint_box.visible = true
 			interaction_hint.text = "Press Space To Insert"
+			set_mobile_action("Insert", "insert")
 		else:
 			interaction_hint_box.visible = true
 			interaction_hint.text = "Press E To Drop"
+			set_mobile_action("Drop", "drop")
 		return
 
 
@@ -324,3 +337,44 @@ func _on_pickup_detector_area_exited(area):
 		nearby_slots.erase(area)
 
 	update_interaction_hint()
+	
+	
+func get_mobile_move_vector() -> Vector2:
+	var controls = get_tree().get_nodes_in_group("mobile_controls")
+
+	if controls.size() == 0:
+		return Vector2.ZERO
+
+	return controls[0].get_move_vector()
+
+
+func set_mobile_action(button_text: String, action_name: String):
+	current_mobile_action = action_name
+
+	var controls = get_tree().get_nodes_in_group("mobile_controls")
+
+	if controls.size() == 0:
+		return
+
+	controls[0].set_action_button(button_text, action_name != "")
+
+
+func mobile_action_pressed():
+	if interaction_enabled == false:
+		return
+
+	if current_mobile_action == "pick":
+		pick_up_value()
+		return
+
+	if current_mobile_action == "insert":
+		insert_into_slot()
+		return
+
+	if current_mobile_action == "drop":
+		drop_carried_piece()
+		return
+
+	if current_mobile_action == "retrieve":
+		retrieve_from_slot()
+		return

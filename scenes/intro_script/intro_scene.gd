@@ -24,7 +24,7 @@ var waiting_for_continue := false
 var intro_pages := [
 	"""> SYSTEM BOOTING...
 
-> UNIT E-LIS ONLINE
+> ROBOT E-LIS ONLINE
 
 > LOCATION:
 > DISTANT PLANET COLUSIIEM""",
@@ -35,10 +35,6 @@ var intro_pages := [
 > PRESSURE VALVE... UNSTABLE
 > OXYGEN ...... EMPTY""",
 
-	"""> LIFE SIGNAL DETECTED:
-
-> WEAK...
-> BUT NOT LOST.""",
 
 	"""> MISSION:
 
@@ -133,7 +129,7 @@ func go_to_level_1():
 
 	await get_tree().create_timer(0.15).timeout
 
-	get_tree().change_scene_to_file(next_scene_path)
+	LoadingManager.load_scene(next_scene_path)
 
 
 func type_text(text_to_type: String):
